@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vízió dokumentum - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Vízió dokumentum</h1>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html" class="active">H2</a></li>
+            <li><a href="h3.html">H3</a></li>
+            <li><a href="h4.html">H4</a></li>
+            <li><a href="h5.html">H5</a></li>
+            <li><a href="analizis-modell.html">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section>
+            <h2>Csapattagok</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Neptunkód</th>
+                        <th>E-mail cím</th>
+                        <th>Szak</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kis-Molnár Ákos</td>
+                        <td>ZRNS1K</td>
+                        <td>kismolnarakos@gmail.com</td>
+                        <td>Gazdaságinformatikus</td>
+                    </tr>
+                    <tr>
+                        <td>Juhász Ábel Lehel</td>
+                        <td>C9Q3LF</td>
+                        <td>juhaszabell2006@gmail.com</td>
+                        <td>Gazdaságinformatikus</td>
+                    </tr>
+                    <tr>
+                        <td>Pocsai Ákos</td>
+                        <td></td>
+                        <td></td>
+                        <td>Gazdaságinformatikus</td>
+                    </tr>
+                    <tr>
+                        <td>Magyar Dávid</td>
+                        <td></td>
+                        <td></td>
+                        <td>Gazdaságinformatikus</td>
+                    </tr>
+                    <tr>
+                        <td>Fazekas Kristóf</td>
+                        <td></td>
+                        <td></td>
+                        <td>Gazdaságinformatikus</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">1.</span> Bevezetés</h2>
+            <p>A Goal Diggers egy modern, játékos közösségi platform, amely új szintre emeli a futballmeccsek követését és élvezetét. Az alkalmazás segítségével a felhasználók egyszerűen és átlátható módon tippelhetnek a közelgő mérkőzések eredményeire, versenyezhetnek barátaikkal vagy más játékosokkal, és közben aktív részesei lehetnek egy futballrajongókból álló közösségnek.</p>
+            
+            <p>A célunk egy olyan alkalmazás létrehozása, amely nem a pénznyereményre épít, hanem a szórakozásra és a közösségi élményre helyezi a hangsúlyt. A felhasználók pontokat gyűjthetnek a helyes tippekért, ranglistákon mérhetik össze tudásukat, valamint baráti ligákhoz is csatlakozhatnak.</p>
+            
+            <p>Az alkalmazás egyszerű, mégis izgalmas módot kínál a mérkőzések követésére, a futball iránti szenvedély megélésére, és a közös élmények megosztására. A Goal Diggers célja, hogy minden meccs több legyen egy egyszerű eredménynél: egy kihívás, egy játék, és egy közösségi kaland.</p>
+            
+            <h3>Funkciók:</h3>
+            <ul>
+                <li>Meccsek listázása és áttekintése – közelgő és lezajlott mérkőzések megjelenítése</li>
+                <li>Tippelési lehetőség – eredmények előrejelzése egyszerű és gyors módon</li>
+                <li>Pontozási rendszer – helyes tippekért járó pontok gyűjtése</li>
+                <li>Ranglisták – országos, baráti és egyéni rangsorok megtekintése</li>
+                <li>Baráti ligák létrehozása – lehetőség saját csoportok indítására, közös játékra</li>
+                <li>Értesítések – emlékeztetők a tippelési határidőkről és az eredményekről</li>
+                <li>Profilok és statisztikák – személyes teljesítmény áttekintése, tipptörténet megtekintése</li>
+                <li>Közösségi élmény – ismerősök meghívása, közös versengés és élménymegosztás</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> Az alkalmazás helye</h2>
+            <p>Az alkalmazást focirajongók, szurkolók, játékosok, edzők, valamint mindazok számára készítjük, akik szeretnének bekapcsolódni a mérkőzések körüli közösségi élménybe és megjósolni a meccsek kimenetelét.</p>
+            
+            <p>A célunk, hogy a platform ne csak a profi szurkolók, hanem a hétköznapi érdeklődők számára is könnyen elérhető és élvezetes legyen.</p>
+            
+            <p>A fő célcsoportunk a 15–45 év közötti sportkedvelők, akik rendszeresen követik a hazai és nemzetközi labdarúgó-bajnokságokat, és szívesen teszik próbára tudásukat a mérkőzések kimenetelének megtippelésével.</p>
+            
+            <p>Ugyanakkor fontosnak tartjuk, hogy az alkalmi szurkolók, valamint a baráti társaságok is megtalálják a szórakozást az alkalmazásban.</p>
+            
+            <p>Az alkalmazás helye a piacon a sport- és közösségi játékalkalmazások kategóriájába tartozik, ahol a cél a felhasználók bevonása a játékos tippelés élményébe.</p>
+            
+            <p>A tippelés mellett nagy hangsúlyt fektetünk a közösségi élményre és a versengésre, amely a sporteseményekhez kapcsolódó szórakozás egyik legfontosabb eleme. Ennek érdekében a felhasználók lehetőséget kapnak arra, hogy baráti ligákat hozzanak létre, közösen játsszanak és egymással versenyezzenek.</p>
+            
+            <h3>A platform többféle felhasználói réteget céloz:</h3>
+            <ul>
+                <li>Alkalmi szurkolók, akik szórakozásból tippelnek és szeretnék összevetni eredményeiket barátaikkal</li>
+                <li>Elhivatott rajongók, akik követik a bajnokságokat és versengeni akarnak országos vagy baráti ranglistákon</li>
+                <li>Baráti társaságok, közösségek, akik közös élményként használják a tippelést</li>
+                <li>Statisztikák iránt érdeklődő felhasználók, akik követik a saját és mások teljesítményét</li>
+                <li>Sportközvetítéseket és fogadási piacokat kedvelők, akik számára fontos az előrejelzés pontossága és a közösségi verseny</li>
+            </ul>
+            
+            <p>Az alkalmazás célja, hogy a mérkőzések nézése és a szurkolás interaktív, játékos és közösségi élménnyé váljon. A felhasználók számára egy helyen kínálja a meccsek listázását, a tippelést, az eredmények követését, valamint a pontok és ranglisták révén motiváló versenyt.</p>
+            
+            <p>Ezzel az alkalmazás összeköti a sportkövetést és a közösségi élményt, és újfajta szórakozást nyújt mind a hazai, mind a nemzetközi foci kedvelőinek.</p>
+            
+            <h3>2.1 Üzleti lehetőségek</h3>
+            <p>Az alkalmazást alapvetően Freeware modellben tervezzük, amely reklámokból termel bevételt.</p>
+            
+            <p>A felhasználóknak lehetőségük lesz előfizetni egy Premium csomagra, amely reklámmentes élményt és extra funkciókat kínál, például részletesebb statisztikákat és speciális baráti ligák létrehozását.</p>
+            
+            <p>A reklámok főként sporthoz kapcsolódó cégek hirdetései lesznek, például sportfelszerelés-gyártók, sportruházat- és kiegészítő-forgalmazók.</p>
+            
+            <p>A partnercégek számára kiemelt megjelenést biztosítunk a felhasználói felületen, illetve a mérkőzések közötti áttekintő képernyőkön.</p>
+            
+            <p>A Premium előfizetés előnyei közé tartozik:</p>
+            <ul>
+                <li>Reklámmentes felület</li>
+                <li>Bővített statisztikák és analitikák</li>
+                <li>Exkluzív baráti ligák indítása és részvétel</li>
+                <li>Speciális ranglisták és díjak elérése</li>
+            </ul>
+            
+            <p>A Premium csomag előfizetési díja havi 1490 Ft. A partnerek minden Premium előfizető után részesedést kapnak, ezzel is ösztönözve a sportmárkák és szponzorok együttműködését.</p>
+            
+            <p>A bevételi modell így két pillérre épül: a hirdetésekre és az előfizetésekre. Ez biztosítja a folyamatos fejlesztést, valamint segíti az alkalmazás növekedését a felhasználói bázis bővítésével.</p>
+            
+            <h3>2.2 Probléma megfogalmazása</h3>
+            <div class="highlight">
+                <p>A projekt egy régóta fennálló hiányosságra kínál megoldást: nincs olyan egységes, könnyen kezelhető és közösségorientált alkalmazás, amely lehetővé teszi a focirajongók számára a mérkőzések kimenetelének megtippelését, az eredmények követését, valamint a közös játék élményét.</p>
+            </div>
+            
+            <p>Jelenleg a szurkolóknak több különböző platformot és eszközt kell használniuk:</p>
+            <ul>
+                <li>Eredménykövető oldalak és alkalmazások a mérkőzések állásának figyelésére</li>
+                <li>Külön csoportok a közösségi médiában vagy chatfelületeken a tippek megosztására</li>
+                <li>Táblázatok vagy más manuális módszerek a pontszámok és versenyek nyilvántartására</li>
+            </ul>
+            
+            <p>Ez a széttagolt élmény kényelmetlen, időigényes és gyakran csökkenti a játék élvezetét, mivel nincs egységes rendszer, amely mindezt átláthatóan és interaktívan kínálná.</p>
+            
+            <p>A probléma másik oldala, hogy a szurkolók egyre inkább interaktív és közösségi élményre vágynak, nem pusztán passzív követői a mérkőzéseknek.</p>
+            
+            <p>A sporteseményekhez kapcsolódó tippelés nemcsak szórakozást nyújt, hanem ösztönzi a felhasználókat arra, hogy jobban megismerjék a csapatokat, stratégiákat, statisztikákat. Ezáltal a szurkolás élménye sokkal személyesebb és izgalmasabb lesz.</p>
+            
+            <p>Hiányzik továbbá egy olyan alkalmazás, amely a felhasználói élmény középpontjába helyezi a baráti és közösségi versengést.</p>
+            
+            <p>Sok sportkedvelő számára fontos, hogy ne csak az országos ranglistán lássa az eredményét, hanem barátaival, családtagjaival vagy munkahelyi csapatokkal is versenyezhessen. Ez jelenleg csak körülményesen, külön platformokkal oldható meg.</p>
+            
+            <p>A jelenlegi piacon elérhető megoldások nem elégítik ki az alábbi igényeket:</p>
+            <ul>
+                <li>Egyszerű, gyors tippelés a mérkőzések előtt</li>
+                <li>Pontozási rendszer, amely motiválja a felhasználókat a folyamatos részvételre</li>
+                <li>Valós idejű értesítések a tippelési határidőkről és az eredményekről</li>
+                <li>Baráti ligák és közösségi kihívások létrehozásának lehetősége</li>
+                <li>Személyes statisztikák és tipptörténet, amely segít nyomon követni a fejlődést</li>
+                <li>Közösségi élmény, amely összeköti a szurkolókat</li>
+            </ul>
+            
+            <p>Alkalmazásunk ezekre a problémákra ad választ azáltal, hogy egyetlen felületen integrálja a legfontosabb funkciókat:</p>
+            <ul>
+                <li>Meccsek listázása és áttekintése – a közelgő és lezajlott mérkőzések megjelenítése</li>
+                <li>Tippelési lehetőség – gyors és egyszerű előrejelzések készítése</li>
+                <li>Pontozási rendszer – helyes tippekért járó pontok gyűjtése</li>
+                <li>Ranglisták – országos, baráti és egyéni versenyek támogatása</li>
+                <li>Baráti ligák létrehozása – közös játék és kihívások szervezése</li>
+                <li>Értesítések – emlékeztetők a határidőkről és az eredményekről</li>
+                <li>Profilok és statisztikák – személyes teljesítmény és tipptörténet nyomon követése</li>
+                <li>Közösségi élmény – ismerősök meghívása, élmények megosztása</li>
+            </ul>
+            
+            <p>Az alkalmazás nem csupán egy tippjáték, hanem egy olyan digitális közösségi tér, amely új szintre emeli a mérkőzések követését és a szurkolást.</p>
+            
+            <p>Segítségével a sportesemények még inkább interaktívvá és szórakoztatóvá válnak, miközben egyszerűbbé és átláthatóbbá teszi a közös játékot és versengést.</p>
+            
+            <h3>2.3 Az elkészült termék helye</h3>
+            <p>Az alkalmazásunk elsődleges célcsoportja a focirajongók és szurkolók, akik szeretik követni a hazai és nemzetközi bajnokságokat, valamint élvezik a közös játékot és a mérkőzések kimenetelének megtippelését.</p>
+            
+            <p>Az app nem csupán a tapasztalt szurkolóknak szól, hanem azoknak is, akik még csak most ismerkednek a sporttal, vagy alkalmanként néznek meccseket, de szívesen bekapcsolódnak a közösségi élménybe.</p>
+            
+            <p>A termék alapvető megjelenési formája egy mobilalkalmazás, amely Android és iOS platformon is elérhető lesz. A hordozhatóság kiemelten fontos, hiszen a felhasználók gyakran útközben, a meccsek előtt vagy közben szeretnének tippeket leadni vagy követni az állásokat.</p>
+            
+            <p>A későbbiekben tervezzük egy webes felület bevezetését is, amely kényelmes hozzáférést biztosít az asztali számítógépeket vagy laptopokat előnyben részesítők számára.</p>
+            
+            <p>Az alkalmazás legfőbb célja, hogy egységes platformot biztosítson a mérkőzések követéséhez és a tippeléshez, miközben szórakoztató, közösségi élményt nyújt.</p>
+            
+            <p>A felhasználók könnyen megtekinthetik a közelgő és lezajlott mérkőzések listáját, leadhatják tippjeiket, pontokat szerezhetnek a helyes előrejelzésekért, és összehasonlíthatják teljesítményüket másokkal a különféle ranglistákon.</p>
+            
+            <p>A rendszerben kiemelt szerepet kap a baráti ligák funkciója, amely lehetőséget ad arra, hogy kisebb közösségek – például baráti társaságok, munkahelyi csapatok vagy iskolai közösségek – saját játékkört hozzanak létre. Ez személyesebb és közvetlenebb versengést biztosít, miközben erősíti a közösségi élményt.</p>
+            
+            <p>Az alkalmazás fontos része a profil és statisztikai modul, amely lehetővé teszi a felhasználók számára, hogy nyomon kövessék a saját teljesítményüket:</p>
+            <ul>
+                <li>Múltbeli tippek és találati arány</li>
+                <li>Havi és szezonális összesített pontok</li>
+                <li>Ranglista-helyezés országos és baráti körökben</li>
+                <li>Személyes fejlődési statisztikák és grafikonok</li>
+            </ul>
+            
+            <p>A termék nemcsak a tapasztalt szurkolók, hanem a sport iránt érdeklődő kezdők számára is hasznos: segít megérteni a bajnokságok menetét, a csapatok formáját, és elősegíti a sport iránti elköteleződést.</p>
+            
+            <p>Célunk, hogy a labdarúgás világát interaktív, közösségépítő élménnyé tegyük, amely egyaránt vonzó a fiatalabb és az idősebb korosztály számára.</p>
+            
+            <p>A felhasználói élmény növelése érdekében az alkalmazás értesítési rendszert kínál, amely figyelmeztet a tippelési határidőkre, a kezdő sípszóra és a mérkőzések végeredményére. Ez segít a felhasználóknak naprakészen követni a történéseket és aktívan részt venni a játékban.</p>
+            
+            <p>A bevételi modell részeként bevezetjük a Premium előfizetést, amely kiegészítő funkciókat nyújt, például:</p>
+            <ul>
+                <li>Reklámmentes felhasználói élmény</li>
+                <li>Bővített statisztikák és részletes előrejelzési grafikonok</li>
+                <li>Exkluzív baráti ligák és versenyek létrehozása</li>
+                <li>Speciális kitűzők, jelvények és elismerések a teljesítmény alapján</li>
+            </ul>
+            
+            <p>Ez a megoldás lehetővé teszi, hogy a lelkes felhasználók még inkább elmélyüljenek az alkalmazásban, miközben a reklámmentes felület és a prémium tartalmak extra motivációt biztosítanak.</p>
+            
+            <p>Az elkészült termék tehát nem pusztán egy tippjáték, hanem egy digitális közösségi platform, amely összeköti a focirajongókat és új dimenziót ad a mérkőzések követésének és az élményszerzésnek.</p>
+            
+            <p>Ezáltal az alkalmazás hozzájárul a sport iránti érdeklődés növekedéséhez, valamint a szurkolói közösségek erősítéséhez, és kényelmes, szórakoztató módot kínál a részvételre.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> Érintettek és felhasználók</h2>
+            <p>A projekt során fontos, hogy azonosítsuk az érintetteket és felhasználókat. Az érintettek közvetlenül részt vesznek az alkalmazás fejlesztésében, karbantartásában és népszerűsítésében, míg a felhasználók azok, akik a kész rendszert napi szinten használják.</p>
+            
+            <p>A világos szerepkör-meghatározás biztosítja, hogy mindenki tisztában legyen a felelősségi körével és a projekt sikeréhez való hozzájárulásával.</p>
+            
+            <h3>3.1 Az érintettek összefoglalása</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elnevezés</th>
+                        <th>Leírás</th>
+                        <th>Szerep</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Programozó</td>
+                        <td>A rendszer technikai megvalósításáért felelős fejlesztők.</td>
+                        <td>Az alkalmazás funkcióinak fejlesztése, hibák javítása.</td>
+                    </tr>
+                    <tr>
+                        <td>Projektmenedzser</td>
+                        <td>A projekt megvalósítását koordináló személy.</td>
+                        <td>A fejlesztési folyamat irányítása, ütemezés, erőforrások kezelése.</td>
+                    </tr>
+                    <tr>
+                        <td>Rendszergazda</td>
+                        <td>A szerverek és az adatbázis működéséért felelős szakember.</td>
+                        <td>Az alkalmazás stabil és biztonságos működésének fenntartása.</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud szolgáltatás</td>
+                        <td>A tárhelyet és adatfeldolgozást biztosító rendszer (pl. AWS, Azure).</td>
+                        <td>A tippelések, meccsadatok és statisztikák tárolása és elérhetővé tétele.</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing menedzser</td>
+                        <td>A termék népszerűsítéséért és a felhasználói bázis növeléséért felelős.</td>
+                        <td>Hirdetések, promóciók, közösségi média kampányok szervezése.</td>
+                    </tr>
+                    <tr>
+                        <td>GUI fejlesztő / UX tervező</td>
+                        <td>A felhasználói felület és élmény kialakításáért felelős szakember.</td>
+                        <td>Egyszerűen kezelhető, vonzó és felhasználóbarát felület készítése.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>3.2 A felhasználók összefoglalása</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elnevezés</th>
+                        <th>Leírás</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Átlagos felhasználó</td>
+                        <td>A regisztrált játékos, aki tippel a mérkőzések eredményeire, és követi a saját pontszámait.</td>
+                    </tr>
+                    <tr>
+                        <td>Haladó felhasználó</td>
+                        <td>Olyan aktív játékos, aki statisztikákat elemez, toplistákat követ, saját ligákat hoz létre.</td>
+                    </tr>
+                    <tr>
+                        <td>Adminisztrátor</td>
+                        <td>A platform működéséért felelős személy, aki kezeli a felhasználókat és a mérkőzésadatokat.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>3.3 Felhasználói környezet</h3>
+            <p>Az általunk fejlesztett focis tippelős alkalmazás és a hozzá tartozó weboldal legfontosabb feladata, hogy kényelmes és gyors hozzáférést biztosítson a labdarúgó-mérkőzésekhez kapcsolódó információkhoz, valamint lehetőséget adjon a felhasználóknak az eredmények megtippelésére.</p>
+            
+            <p>A rendszer úgy lett kialakítva, hogy platformfüggetlen legyen: elérhető mobilalkalmazásként (Android és iOS), valamint webes felületen keresztül is. Ez lehetővé teszi, hogy a felhasználók bármikor és bárhonnan elérjék az alkalmazás funkcióit.</p>
+            
+            <h4>Elérhetőség és platformok</h4>
+            <p>A felhasználók számára különösen fontos, hogy a rendszer folyamatosan működőképes legyen, különösen a nagyobb sportesemények (például világbajnokság, Európa-bajnokság vagy hazai bajnokságok rangadói) idején, amikor a forgalom jelentősen megnövekszik.</p>
+            
+            <p>A szerveroldali infrastruktúrát felhőalapú szolgáltatások (AWS, Azure) biztosítják, ami lehetővé teszi a rendszer dinamikus skálázását a terheléshez igazodva.</p>
+            
+            <ul>
+                <li>Az alkalmazás maximálisan 1 millió regisztrált felhasználót képes kezelni.</li>
+                <li>Az architektúra biztosítja, hogy egyidejűleg akár 100 000 felhasználó is gond nélkül használhassa az alkalmazást (például tippeljen, adatokat böngésszen vagy élő frissítéseket kapjon).</li>
+                <li>A rendszer automatikusan méretezi a számítási és tárolási erőforrásokat a felhasználói aktivitás függvényében.</li>
+            </ul>
+            
+            <h4>Felhasználói élmény és dizájn</h4>
+            <p>A felhasználói környezet kialakításánál kiemelt szempont volt a felhasználóbarát és letisztult megjelenés.</p>
+            
+            <p>A színek harmonizálnak a sporttematikával, ugyanakkor a kontraszt és a betűtípusok segítik a gyors olvashatóságut.</p>
+            
+            <p>A főoldalról minden kulcsfontosságú funkció (következő mérkőzések, tippelés, toplista, statisztikák) azonnal elérhető.</p>
+            
+            <p>A cél, hogy még a kevésbé gyakorlott felhasználók is könnyen tudják használni az alkalmazást, külön útmutató vagy betanulás nélkül.</p>
+            
+            <p>A felhasználói élményt növeli:</p>
+            <ul>
+                <li>Élő értesítések (például kezdési időpont, gólok, meccs végeredmény).</li>
+                <li>Könnyű navigáció és keresés a csapatok és ligák között.</li>
+                <li>Személyre szabott ajánlások a korábbi tippelések alapján.</li>
+            </ul>
+            
+            <h4>Adatbiztonság és felhasználói fiókok</h4>
+            <p>A rendszer a felhasználók adatvédelmére külön figyelmet fordít.</p>
+            
+            <p>Nem tárol személyes adatokat a szükséges minimumon túl, a tippelések és aktivitások adatai anonim módon kerülnek feldolgozásra.</p>
+            
+            <p>A felhasználók adatai titkosított formában tárolódnak, a kommunikáció TLS-alapú biztonságos csatornán történik.</p>
+            
+            <p>Minden felhasználó létrehozhat személyes profilt, ahol:</p>
+            <ul>
+                <li>Nyomon követheti a saját statisztikáit és korábbi tippjeit.</li>
+                <li>Módosíthatja a fiókbeállításait és értesítési preferenciáit.</li>
+                <li>Kiválaszthatja a kedvenc csapatait és bajnokságait, amelyekről az alkalmazás automatikusan frissítéseket küld.</li>
+            </ul>
+            
+            <h4>Terhelhetőség és működési feltételek</h4>
+            <p>A rendszer alapvetően internetkapcsolatot igényel, de a már betöltött adatok (pl. előző fordulók eredményei) rövid ideig offline módban is megtekinthetők.</p>
+            
+            <p>A skálázható felhőinfrastruktúra miatt a szerver képes megbirkózni a megnövekedett forgalommal például világbajnoki mérkőzések idején</p>
+            
+            <ul>
+                <li>A rendszer stabil működését 99,9%-os rendelkezésre állás mellett biztosítja a szolgáltató.</li>
+                <li>A meccsek idején várható csúcsterhelésnél (például a félidőben és lefújás után) a szerver egyszerre akár 50 000–100 000 aktív felhasználó tippjeit és lekérdezéseit kezeli gond nélkül.</li>
+                <li>A beépített monitorozó rendszer folyamatosan figyeli a teljesítményt, és szükség esetén automatikusan növeli az erőforrásokat.</li>
+            </ul>
+            
+            <h3>Célközönség</h3>
+            <p>Az alkalmazás elsődleges felhasználói a labdarúgás szerelmesei, edzők, baráti társaságok, illetve azok, akik szeretik a közösségi tippelős játékokat.</p>
+            
+            <p>A felhasználók összetétele a kutatásaink alapján:</p>
+            <ul>
+                <li>38% alkalmi felhasználó, akik elsősorban a kedvenc csapataik meccseit követik.</li>
+                <li>52% rendszeres, aktív tippelő, akik több bajnokságban is részt vesznek.</li>
+                <li>10% úgynevezett „kíváncsiskodó” réteg, akik ritkán adnak le tippet, de böngészik a statisztikákat.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.2</span> A termék használatának előnyei</h2>
+            <p>A focis tippelős alkalmazás számos előnyt kínál mind az alkalmi felhasználóknak, mind a rendszeres játékosoknak.</p>
+            
+            <p>Az alkalmazás nem csupán szórakoztató, hanem kényelmes és hasznos eszköz a futball-rajongók számára, amely egyszerre támogatja az élő sportélményt és a közösségi interakciót.</p>
+            
+            <ol>
+                <li><strong>Kényelmes és bárhonnan elérhető</strong>
+                    <ul>
+                        <li>Az alkalmazás mobilon és weben is elérhető, így a felhasználók bárhol, bármikor tippelhetnek.</li>
+                        <li>A felhőalapú rendszernek köszönhetően a felhasználói adatok minden eszközön szinkronizálva vannak, így akár telefonról, akár számítógépről belépve ugyanaz a profil és statisztika érhető el.</li>
+                        <li>Nem szükséges papíron vezetni a tippeket vagy külön keresni a mérkőzésadatokat.</li>
+                    </ul>
+                </li>
+                <li><strong>Valós idejű frissítések</strong>
+                    <ul>
+                        <li>Az élő értesítések lehetővé teszik, hogy a felhasználók azonnal értesüljenek a gólokról, mérkőzésállásról és eredményekről.</li>
+                        <li>A toplisták és statisztikák automatikusan frissülnek, így a játékosok mindig naprakészek lehetnek a saját pontszámukkal és a közösségi rangsorral kapcsolatban.</li>
+                    </ul>
+                </li>
+                <li><strong>Közösségi élmény és versenyszellem</strong>
+                    <ul>
+                        <li>A felhasználók ligákat hozhatnak létre barátokkal, családtagokkal vagy munkatársakkal, ami közösségi élményt biztosít.</li>
+                        <li>A ranglisták és pontversenyek fokozzák a játék izgalmát, és motiválják a felhasználókat a rendszeres részvételre.</li>
+                        <li>A közösségi funkciók révén a felhasználók megoszthatják tippjeiket és versenghetnek egymással.</li>
+                    </ul>
+                </li>
+                <li><strong>Statisztikai támogatás</strong>
+                    <ul>
+                        <li>Az alkalmazás elemzéseket és grafikonokat biztosít a csapatok, játékosok és bajnokságok teljesítményéről.</li>
+                        <li>A múltbeli adatok alapján a felhasználók jobban átgondolhatják a tippjeiket, növelve ezzel a találati arányukat.</li>
+                        <li>A statisztikai modul különösen hasznos a haladó felhasználók számára, akik szeretnek adatvezérelt döntéseket hozni.</li>
+                    </ul>
+                </li>
+                <li><strong>Felhasználóbarát kezelés</strong>
+                    <ul>
+                        <li>Letisztult felület és logikus menürendszer, amely még a kezdő felhasználóknak is egyszerűvé teszi a használatot.</li>
+                        <li>Az alkalmazás gyorsan betöltődik, és minimális internetforgalmat igényel, így gyengébb hálózati környezetben is jól működik.</li>
+                        <li>A sötét és világos mód közötti váltás kíméli a felhasználók szemét.</li>
+                    </ul>
+                </li>
+                <li><strong>Biztonság és adatvédelem</strong>
+                    <ul>
+                        <li>A felhasználók személyes adatai titkosítottan kerülnek tárolásra, így biztosítva a biztonságot és a magánszféra védelmét.</li>
+                        <li>Az alkalmazás megfelel a legfontosabb adatvédelmi irányelveknek (például GDPR), így a felhasználók nyugodtan használhatják anélkül, hogy aggódnának az adataik miatt.</li>
+                    </ul>
+                </li>
+                <li><strong>Skálázható és megbízható működés</strong>
+                    <ul>
+                        <li>A rendszer nagy terhelés mellett is gyorsan és stabilan működik, akár csúcsidőben is (például világbajnoki döntők alatt).</li>
+                        <li>Egyidejűleg akár 100 000 aktív felhasználó is problémamentesen használhatja az alkalmazást.</li>
+                        <li>A 99,9%-os rendelkezésre állásnak köszönhetően a szolgáltatás folyamatosan elérhető.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.3</span> Feltételezések és függőségek</h2>
+            <p>A focis tippelős alkalmazás sikeres fejlesztése és üzemeltetése bizonyos feltételezések teljesülésén és külső tényezőkön alapul.</p>
+            
+            <p>Ezeket fontos rögzíteni, mert a projekt során és a működés közben is hatással lehetnek az alkalmazás stabilitására és a felhasználói élményre.</p>
+            
+            <h3>Feltételezések</h3>
+            <p>A fejlesztés és a működés során feltételezzük, hogy a felhasználók rendelkeznek stabil internetkapcsolattal, amely lehetővé teszi az alkalmazás gyors és zökkenőmentes használatát. Fontos feltételezés továbbá, hogy a felhasználók modern, megfelelő teljesítményű eszközöket (okostelefont, táblagépet vagy számítógépet) használnak, amelyek kompatibilisek az alkalmazás követelményeivel.</p>
+            
+            <p>Számítunk arra, hogy a célközonség aktívan részt vesz a tippelésben, és motivált a platform rendszeres használatára. A felhasználók részéről elvárjuk a szoftverfrissítések (mobilapp és böngésző) naprakészen tartását, hogy elkerüljük a kompatibilitási problémákat.</p>
+            
+            <p>Feltételezzük, hogy a sportesemények hivatalos adatforrásai folyamatosan és megbízhatóan biztosítják a szükséges információkat (például a mérkőzések időpontját, gólokat, statisztikákat), így az alkalmazás mindig naprakész adatokat tud megjeleníteni.</p>
+            
+            <p>Szintén feltételezzük, hogy az alkalmazás megfelel az adatvédelmi és jogi előírásoknak (például GDPR), és ezen szabályok a működés során nem változnak jelentősen.</p>
+            
+            <h3>Függőségek</h3>
+            <p>Az alkalmazás működése több külső tényezőtől és harmadik fél által nyújtott szolgáltatástól is függ.</p>
+            
+            <p>Az egyik legfontosabb függőség a sportadat-szolgáltatók működése, mivel a mérkőzésekhez kapcsolódó információk (például élő eredmények és statisztikák) ezekből a forrásokból érkeznek.</p>
+            
+            <p>A rendszer teljesítménye és skálázhatósága nagymértékben függ a választott felhőszolgáltató (például AWS vagy Azure) megbízhatóságától. A valós idejű értesítések működéséhez szükséges a push értesítési szolgáltatások (például Firebase, APNs) stabil üzemelése.</p>
+            
+            <p>Ha az alkalmazás később prémium funkciókat kínál fizetős előfizetés formájában, akkor a fizetési átjárók hibátlan működése szintén kulcsfontosságú.</p>
+            
+            <p>A felhasználók gyors és zökkenőmentes élményét nagymértékben befolyásolja a helyi internet- és mobilhálózatok teljesítménye, különösen a kiemelt mérkőzések idején, amikor sok ezer ember egyszerre csatlakozik a rendszerhez.</p>
+            
+            <p>További függőséget jelent az operációs rendszerek (Android, iOS, Windows, macOS) és a böngészők frissítéseinek folyamatos kompatibilitása az alkalmazással.</p>
+            
+            <p>A fejlesztőcsapatnak időről időre gondoskodnia kell arról, hogy az alkalmazás a legújabb verziókkal is hibátlanul működjön.</p>
+            
+            <h3>Kockázatok</h3>
+            <p>A feltételezések és függőségek nem teljesülése különféle kockázatokhoz vezethet.</p>
+            
+            <p>Ha a sportadat-szolgáltató nem tud adatokat küldeni, az alkalmazás nem lesz képes időben frissíteni az eredményeket, ami ronthatja a felhasználói élményt.</p>
+            
+            <p>Ha a cloud infrastruktúra nem skálázódik elég gyorsan a csúcsterhelés idején (például világbajnoki döntők alatt), az lassabb betöltést és ideiglenes leállásokat eredményezhet.</p>
+            
+            <p>Jogszabályi változások szintén kihívást jelenthetnek, mivel szükségessé válhat az adatkezelési folyamatok módosítása.</p>
+            
+            <p>A mobilértesítések meghibásodása pedig azt eredményezheti, hogy a felhasználók késve kapják meg a mérkőzésekkel kapcsolatos fontos értesítéseket.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> A végtermék jellemzői</h2>
+            <p>A fejlesztés során létrejött végtermék egy focis tippelős alkalmazás és a hozzá tartozó webes platform, amely a labdarúgás rajongói számára készült.</p>
+            
+            <p>A rendszer célja, hogy a felhasználók egyszerűen követhessék a mérkőzéseket, előre megtippelhessék az eredményeket, és közösségi versenyeken vehessenek részt.</p>
+            
+            <p>A végtermék a modern technológiákra, a felhőalapú szolgáltatásokra és a felhasználói élményre helyezi a hangsúlyt, hogy hosszú távon stabil, biztonságos és szórakoztató élményt nyújtson.</p>
+            
+            <h3>5.1 Általános jellemzők</h3>
+            <p>A végtermék két fő részből áll:</p>
+            <ol>
+                <li><strong>Mobilalkalmazás</strong> – Androidra és iOS-re is elérhető, natív módon fejlesztett alkalmazás.</li>
+                <li><strong>Webes felület</strong> – Reszponzív webalkalmazás, amely böngészőből is elérhető minden modern eszközön.</li>
+            </ol>
+            
+            <p>A mobilalkalmazás és a webes felület teljesen szinkronizált, vagyis a felhasználó bármelyik platformon folytathatja a megkezdett tevékenységeit (pl. tippelés, toplista követése).</p>
+            
+            <h3>5.2 Funkcionális jellemzők</h3>
+            
+            <h4>Tippelés</h4>
+            <p>A rendszer fő funkciója a meccsek eredményének megtippelése.</p>
+            
+            <p>A felhasználók a mérkőzések kezdete előtt leadhatják a tippjeiket a pontos eredményre vagy a győztes csapatra.</p>
+            
+            <p>A tippelés határidejét a rendszer automatikusan kezeli, és a kezdősípszó után lezárja a beküldési lehetőséget.</p>
+            
+            <h4>Élő frissítések</h4>
+            <p>Az alkalmazás valós idejű értesítéseket küld a felhasználóknak:</p>
+            <ul>
+                <li>Gólok és piros lapok,</li>
+                <li>Félidei és végeredmények,</li>
+                <li>Fontos mérkőzések kezdési időpontjai.</li>
+            </ul>
+            
+            <p>Ez lehetővé teszi, hogy a felhasználók folyamatosan tájékozottak maradjanak a játék állásáról, még akkor is, ha épp nem tudják nézni a meccset.</p>
+            
+            <h4>Közösségi és versenyfunkciók</h4>
+            <p>A felhasználók részt vehetnek:</p>
+            <ul>
+                <li>Nyilvános toplistákban (globális rangsor),</li>
+                <li>Privát ligákban (barátokkal, munkahelyi csapatokkal),</li>
+                <li>Havi és szezonális kihívásokban.</li>
+            </ul>
+            
+            <h4>Statisztikai modul</h4>
+            <p>A rendszer statisztikákat és elemzéseket biztosít:</p>
+            <ul>
+                <li>Csapatok és játékosok formája,</li>
+                <li>Korábbi találkozók eredményei,</li>
+                <li>Tippelési előzmények és találati arány.</li>
+            </ul>
+            
+            <h4>Profilkezelés</h4>
+            <p>Minden felhasználónak saját profilja van, ahol:</p>
+            <ul>
+                <li>Nyomon követheti a pontjait és helyezését a toplistán,</li>
+                <li>Módosíthatja beállításait,</li>
+                <li>Kedvenc csapatokat és bajnokságokat jelölhet ki,</li>
+                <li>Kezelheti az értesítéseket.</li>
+            </ul>
+            
+            <h4>Biztonság</h4>
+            <p>A felhasználói adatok titkosítottan tárolódnak, az adatátvitel TLS/SSL protokollokon keresztül történik.</p>
+            
+            <p>A rendszer megfelel a GDPR és más nemzetközi adatvédelmi szabványoknak.</p>
+            
+            <h4>Kompatibilitás</h4>
+            <p>Az alkalmazás támogatja:</p>
+            <ul>
+                <li>Android 8.0 és újabb verziókat,</li>
+                <li>iOS 13 és újabb verziókat,</li>
+                <li>Minden jelentős böngészőt (Chrome, Firefox, Safari, Edge).</li>
+            </ul>
+            
+            <h4>Használhatóság</h4>
+            <p>A felhasználói felület letisztult, egyszerűen kezelhető, és kétféle megjelenítési módot kínál:</p>
+            <ul>
+                <li>Világos mód,</li>
+                <li>Sötét mód (kényelmesebb éjszakai használat során).</li>
+            </ul>
+            
+            <h3>5.4 Technológiai jellemzők</h3>
+            <ul>
+                <li>Backend: Node.js + Express vagy hasonló keretrendszer</li>
+                <li>Frontend: React Native (mobil), React.js (web)</li>
+                <li>Adatbázis: PostgreSQL, felhőben tárolva</li>
+                <li>Felhőszolgáltatás: AWS / Azure skálázható infrastruktúrával</li>
+                <li>Push értesítések: Firebase Cloud Messaging (Android) és Apple Push Notification Service (iOS)</li>
+                <li>Hitelesítés: OAuth 2.0 és kétlépcsős azonosítás támogatása</li>
+                <li>API integráció: Külső sportadat-szolgáltatók (pl. LiveScore API)</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">7.</span> Minőségi elvárások</h2>
+            <p>A focis tippelős alkalmazás minőségének biztosítása alapvető cél a felhasználói elégedettség és a hosszú távú siker érdekében.</p>
+            
+            <p>A minőségi elvárások meghatározása több területet érint: teljesítmény, megbízhatóság, biztonság, használhatóság, valamint karbantarthatóság és bővíthetőség.</p>
+            
+            <p>Ezek az elvárások biztosítják, hogy a végtermék magas szintű felhasználói élményt nyújtson, és megfeleljen a piaci és technológiai követelményeknek.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">9.</span> Kockázat lista</h2>
+            <p>A focis tippelős alkalmazás fejlesztése és üzemeltetése során számos olyan kockázat merülhet fel, amely hatással lehet a projekt sikerére, az alkalmazás minőségére vagy a felhasználói élményre.</p>
+            
+            <p>A kockázatok feltárása és időben történő kezelése elengedhetetlen a megbízható, biztonságos és hosszú távon fenntartható működés biztosításához.</p>
+            
+            <h3>9.1 Technikai kockázatok</h3>
+            <p>A technikai kockázatok olyan problémákból erednek, amelyek a rendszer infrastruktúrájával, fejlesztési környezetével vagy külső szolgáltatásokkal kapcsolatosak.</p>
+            
+            <ul>
+                <li><strong>Adatforrások megbízhatatlansága:</strong> Ha a sportadat-szolgáltatók (pl. LiveScore API) hibát tapasztalnak vagy késve továbbítják az adatokat, az alkalmazás nem tudja időben frissíteni az eredményeket, ami a felhasználói elégedettség csökkenéséhez vezethet.</li>
+                <li><strong>Infrastruktúra leállása:</strong> A felhőszolgáltatók (AWS, Azure) ideiglenes leállása vagy a hálózati problémák az alkalmazás működésképtelenségét okozhatják.</li>
+                <li><strong>Teljesítményproblémák:</strong> Kiemelt sportesemények (pl. VB-döntő) idején a rendszer túlterhelődhet, ha a skálázhatósági beállítások nem megfelelőek.</li>
+                <li><strong>Integrációs hibák:</strong> Az API-k vagy harmadik féltől származó szolgáltatások változása inkompatibilitást okozhat.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">10.</span> Szótár</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Angol kifejezés</th>
+                        <th>Magyar megfelelő</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>user</td>
+                        <td>felhasználó</td>
+                    </tr>
+                    <tr>
+                        <td>bug</td>
+                        <td>hiba egy rendszerben</td>
+                    </tr>
+                    <tr>
+                        <td>restart</td>
+                        <td>újraindítás</td>
+                    </tr>
+                    <tr>
+                        <td>update</td>
+                        <td>frissítés</td>
+                    </tr>
+                    <tr>
+                        <td>app</td>
+                        <td>alkalmazás</td>
+                    </tr>
+                    <tr>
+                        <td>patch</td>
+                        <td>javítócsomag</td>
+                    </tr>
+                    <tr>
+                        <td>account</td>
+                        <td>felhasználói fiók</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Vízió dokumentum - H2</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
