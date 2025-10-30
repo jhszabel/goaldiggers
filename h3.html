@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vízió dokumentum - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #4CAF50;
+            margin: 1.2rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        .use-case-img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Vízió dokumentum</h1>
+            <div class="subtitle">Goal Diggers - H3</div>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html">H2</a></li>
+            <li><a href="h3.html" class="active">H3</a></li>
+            <li><a href="h4.html">H4</a></li>
+            <li><a href="h5.html">H5</a></li>
+            <li><a href="analizis-modell.html">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section>
+            <h2><span class="section-icon">1.</span> Bevezetés</h2>
+            <p>A Goal Diggers egy modern, játékos közösségi platform, amely új szintre emeli a futballmeccsek követését és élvezetét. Az alkalmazás segítségével a felhasználók egyszerűen és átlátható módon tippelhetnek a közelgő mérkőzések eredményeire, versenyezhetnek barátaikkal vagy más játékosokkal, és közben aktív részesei lehetnek egy futballrajongókból álló közösségnek.</p>
+            
+            <p>A célunk egy olyan alkalmazás létrehozása, amely nem a pénznyereményre épít, hanem a szórakozásra és a közösségi élményre helyezi a hangsúlyt. A felhasználók pontokat gyűjthetnek a helyes tippekért, ranglistákon mérhetik össze tudásukat, valamint baráti ligákhoz is csatlakozhatnak.</p>
+            
+            <p>Az alkalmazás egyszerű, mégis izgalmas módot kínál a mérkőzések követésére, a futball iránti szenvedély megélésére, és a közös élmények megosztására. A Goal Diggers célja, hogy minden meccs több legyen egy egyszerű eredménynél: egy kihívás, egy játék, és egy közösségi kaland.</p>
+            
+            <h3>Funkciók:</h3>
+            <ul>
+                <li>Meccsek listázása és áttekintése – közelgő és lezajlott mérkőzések megjelenítése</li>
+                <li>Tippelési lehetőség – eredmények előrejelzése egyszerű és gyors módon</li>
+                <li>Pontozási rendszer – helyes tippekért járó pontok gyűjtése</li>
+                <li>Ranglisták – országos, baráti és egyéni rangsorok megtekintése</li>
+                <li>Baráti ligák létrehozása – lehetőség saját csoportok indítására, közös játékra</li>
+                <li>Értesítések – emlékeztetők a tippelési határidőkről és az eredményekről</li>
+                <li>Profilok és statisztikák – személyes teljesítmény áttekintése, tipptörténet megtekintése</li>
+                <li>Közösségi élmény – ismerősök meghívása, közös versengés és élménymegosztás</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> Áttekintés</h2>
+            <p>A Goal Diggers alkalmazás egy közösségi tippjáték platform, amely a futballmérkőzések követésére, előrejelzésére és a közösségi élmény erősítésére fókuszál.</p>
+            
+            <p>A rendszer a mérkőzésadatokat külső forrásokból (API) szerzi be, majd ezeket teszi elérhetővé a felhasználóknak tippeléshez és statisztikákhoz.</p>
+            
+            <h3>2.1 Mérkőzésadatok forrása</h3>
+            <p>A mérkőzésadatokat megbízható sportadat-szolgáltató partnerektől (pl. football-data.org) szerezzük be.</p>
+            
+            <p>A felhasználók csak a rendszer által biztosított mérkőzésekre adhatnak le tippeket.</p>
+            
+            <p>A meccsekhez tartozó adatok (dátum, csapatok, kezdési idő, aktuális állás, végeredmény) automatikusan frissülnek.</p>
+            
+            <h3>2.2 Ingyenes felhasználók</h3>
+            <p>Az ingyenes felhasználók:</p>
+            <ul>
+                <li>Tippeket adhatnak le a mérkőzésekre,</li>
+                <li>Részt vehetnek a globális ranglistán,</li>
+                <li>Korlátozott számú baráti ligához csatlakozhatnak,</li>
+                <li>Reklámokat látnak az alkalmazás használata közben (sporthoz kapcsolódó hirdetések).</li>
+            </ul>
+            
+            <h3>2.3 Prémium felhasználók</h3>
+            <p>A prémium csomagra előfizető felhasználók:</p>
+            <ul>
+                <li>Hirdetésmentesen használhatják az alkalmazást,</li>
+                <li>Korlátlan számú baráti ligát hozhatnak létre,</li>
+                <li>Részletesebb statisztikákhoz és analitikákhoz férhetnek hozzá,</li>
+                <li>Extra profiljelvényeket és testreszabási lehetőségeket kapnak.</li>
+            </ul>
+            
+            <h3>2.4 Korlátozások</h3>
+            <div class="highlight">
+                <ul>
+                    <li>Tipp leadása csak a mérkőzés kezdete előtt lehetséges.</li>
+                    <li>A felhasználóknak internetkapcsolatra van szükségük a funkciók eléréséhez.</li>
+                    <li>A prémium szolgáltatások előfizetéshez kötöttek.</li>
+                    <li>A rendszer moderálja a nem megfelelő tartalmat (például a közösségi bejegyzésekben).</li>
+                </ul>
+            </div>
+            
+            <h3>2.5 Fizetési integráció szerepe</h3>
+            <p>A prémium csomagok aktiválásához a rendszer külső fizetési szolgáltatóval (pl. Simple Pay) integrálódik.</p>
+            
+            <p>Ez lehetővé teszi a biztonságos online fizetést, valamint az előfizetések megújítását és kezelését.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> A rendszer funkciói</h2>
+            <p>A Goal Diggers alkalmazás számos funkciót kínál a felhasználók számára, amelyek a focimeccsek követését és tippelését teszik szórakoztatóvá és interaktívvá.</p>
+            
+            <h3>3.1 Főbb funkciók Use-Case diagrammal</h3>
+            <p>Az alábbi diagram szemlélteti a Goal Diggers alkalmazás főbb funkcióit és azok használati eseteit:</p>
+            
+            <img src="use_case.png" alt="Goal Diggers Use-Case diagram" class="use-case-img">
+            
+            <p>A Use-Case diagram bemutatja a rendszer főbb szereplőit (felhasználók, adminisztrátorok) és az általuk végrehajtható műveleteket. Látható, hogy a felhasználók számára elérhetőek a tippelés, ranglisták követése, baráti ligák kezelése, míg az adminisztrátorok felelősek a mérkőzésadatok kezeléséért és a felhasználói fiókok moderálásáért.</p>
+            
+            <h3>Kezdőlap menü:</h3>
+            <p>A kezdőlapról elérhetjük az alábbi főbb menüpontokat: Meccsek, Tippelés, Ranglista, Ligák, Profil, Értesítések.</p>
+            
+            <h4>Meccsek</h4>
+            <p>Ebben a menüpontban a felhasználó megtekintheti az összes közelgő és már lezajlott mérkőzést.</p>
+            <p>Minden mérkőzésnél látható a kezdési idő, a csapatok neve, valamint a végeredmény, ha a mérkőzés már befejeződött.</p>
+            
+            <h4>Tippelés</h4>
+            <p>Itt lehetősége van a felhasználónak leadni a mérkőzésekre vonatkozó tippjeit.</p>
+            <p>A tippelés csak a mérkőzés kezdete előtt engedélyezett.</p>
+            <p>A felhasználó megadhatja a két csapat által szerzett gólok számát.</p>
+            
+            <h4>Ranglista</h4>
+            <p>A ranglista menüpontban a felhasználók megnézhetik, hány pontot gyűjtöttek a tippjeik alapján.</p>
+            <p>Többféle ranglistát lehet megtekinteni: országos, baráti ligás és személyes.</p>
+            
+            <h4>Ligák</h4>
+            <p>A ligák menüpontban a felhasználó létrehozhat új baráti ligákat vagy csatlakozhat meglévő ligákhoz.</p>
+            <p>A ligákon belül külön ranglistát vezetünk az adott csoport tagjai között.</p>
+            
+            <h4>Profil</h4>
+            <p>A profil menüpontban a felhasználó áttekintheti a saját statisztikáit: összes leadott tipp, helyes tippek száma, pontok, valamint a tippelési előzmények.</p>
+            
+            <h4>Értesítések</h4>
+            <p>Az értesítések menüpontban megtekinthetők a rendszer által küldött emlékeztetők és információk, például a tippelési határidőkről, meccseredményekről vagy a ligákban történt változásokról.</p>
+            
+            <h3>Bejelentkezési menü:</h3>
+            <p>A bejelentkezett felhasználók teljes funkcionalitást érhetnek el, míg a vendég felhasználók csak a mérkőzések listáját és a ranglisták összefoglalóját láthatják.</p>
+            
+            <h3>Pontozási rendszer:</h3>
+            <p>A helyes tippelésekért pontokat lehet gyűjteni.</p>
+            <p>Például: pontos találatért magasabb, a kimenetel helyes eltalálásáért alacsonyabb pont jár.</p>
+            
+            <h3>Baráti ligák kezelése:</h3>
+            <p>A felhasználó saját ligát hozhat létre, meghívhatja barátait, és a csoporton belül versenyezhet.</p>
+            
+            <h3>Nyelvi beállítások:</h3>
+            <p>Az alkalmazás több nyelvet támogat (pl. magyar, angol, német), amelyet a profilbeállításokban lehet módosítani.</p>
+            
+            <h3>Fizetési lehetőségek:</h3>
+            <p>A prémium funkciók (hirdetésmentesség, extra statisztikák) eléréséhez előfizetés szükséges, amelyet Simple Pay integráción keresztül lehet teljesíteni.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.</span> Megbízhatóság</h2>
+            <p>A Goal Diggers egyik legfontosabb alapelve a megbízhatóság. Mivel az alkalmazás valós idejű adatokkal – mérkőzésinformációkkal, tippelési határidőkkel, pontszámításokkal – dolgozik, elsődleges cél, hogy minden felhasználó pontos és hiteles információkhoz jusson.</p>
+            
+            <p>Az alkalmazás architektúrája felhőalapú infrastruktúrára épül, amely automatikus mentési és szinkronizációs folyamatokkal biztosítja az adatvesztés minimalizálását. Az összes kommunikáció titkosított csatornán (HTTPS/TLS) keresztül zajlik, ezáltal a felhasználói adatok és tippek biztonságban maradnak.</p>
+            
+            <p>A megbízhatóság növelése érdekében a rendszer redundáns szervereken fut, így akár hirtelen megnövekedett terhelés – például nagy tornák vagy döntők idején – esetén is stabil marad. Az alkalmazás automatikus hibadetektáló és monitoring eszközökkel rendelkezik, amelyek azonnal jelzik a fejlesztői csapatnak az esetleges rendellenességeket.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> Használhatóság</h2>
+            <p>A Goal Diggers úgy lett tervezve, hogy a lehető legszélesebb felhasználói kör számára könnyen elérhető és egyszerűen kezelhető legyen. A modern, letisztult felhasználói felület lehetővé teszi, hogy akár a technológiában kevésbé jártas futballrajongók is gyorsan eligazodjanak.</p>
+            
+            <ul>
+                <li>Egyszerű regisztráció és bejelentkezés: a folyamat néhány lépésben elvégezhető, lehetőséget biztosítva a közösségi médiás fiókokkal való csatlakozásra is.</li>
+                <li>Reszponzív felület: az alkalmazás zökkenőmentesen működik mobiltelefonokon, táblagépeken és asztali számítógépeken, így bárhol kényelmesen elérhető.</li>
+                <li>Könnyű navigáció: a mérkőzések, tippelési funkciók, ranglisták és baráti ligák logikusan felépített menüstruktúrában találhatók, így a felhasználók minimális idő alatt elérhetik a kívánt funkciókat.</li>
+                <li>Értesítési rendszer: emlékeztetők segítenek abban, hogy a játékosok ne maradjanak le a tippelési határidőkről, valamint azonnal értesüljenek az eredményekről és a pontjaik alakulásáról.</li>
+            </ul>
+            
+            <p>A használhatóságra kiemelt figyelmet fordítottunk a vizuális kialakításnál is: az intuitív ikonok, a kontrasztos színek és az egyszerű grafikai elemek hozzájárulnak a gyors és problémamentes kezelhetőséghez.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">6.</span> Teljesítmény</h2>
+            <p>A Goal Diggers teljesítményének optimalizálása kulcsfontosságú volt, hogy a felhasználók élménye gördülékeny maradjon. A rendszer skálázható szerverinfrastruktúrára épül, amely képes kezelni a hirtelen megnövekedett adatforgalmat.</p>
+            
+            <ul>
+                <li>Gyors adatfeldolgozás: a mérkőzések eredményei és a tippek feldolgozása valós időben történik, így a felhasználók azonnal láthatják a pontjaik változását.</li>
+                <li>Alacsony erőforrásigény: az alkalmazás optimalizált kódbázissal rendelkezik, amely lehetővé teszi a gyors betöltést és a zökkenőmentes működést gyengébb hardverrel rendelkező eszközökön is.</li>
+                <li>Valós idejű frissítések: a statisztikák, ranglisták és mérkőzésadatok automatikusan frissülnek, minimalizálva a manuális frissítés szükségességét.</li>
+            </ul>
+            
+            <p>A teljesítmény folyamatos monitorozása és optimalizálása révén az alkalmazás megbízhatóan szolgálja ki a felhasználókat még csúcsidőszakokban is.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">7.</span> Esetleges hibák és hibakezelés</h2>
+            <p>Minden nagy volumenű digitális platform esetében előfordulhatnak hibák, így a Goal Diggers sem teljesen mentes tőlük. A fejlesztés során azonban már a tervezési szakaszban külön figyelmet fordítottunk a hibák megelőzésére és gyors kezelésére.</p>
+            
+            <p>A leggyakrabban előforduló problémák:</p>
+            <ul>
+                <li>Értesítési késedelmek nagy forgalom idején (például világbajnoki döntők előtt).</li>
+                <li>Időszakos szerverleállások vagy karbantartási szünetek.</li>
+                <li>Esetenként lassabb adatfrissítés régebbi vagy gyengébb teljesítményű eszközökön.</li>
+            </ul>
+            
+            <p>A hibák jelentését a felhasználók közvetlenül az alkalmazásból tehetik meg a beépített hibabejelentő funkció segítségével. A fejlesztői csapat folyamatosan figyeli a felhasználói visszajelzéseket és a háttérrendszer logjait, így a problémák gyorsan azonosíthatók és javíthatók.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">8.</span> Rendszerkövetelmények</h2>
+            <p>A Goal Diggers fejlesztése során fontos szempont volt, hogy az alkalmazás minél szélesebb körben elérhető legyen, miközben megfelelő teljesítményt biztosít a különböző eszközökön.</p>
+            
+            <h3>Minimum követelmények:</h3>
+            <ul>
+                <li>CPU: Dual-Core, 1.84 GHz vagy annál gyorsabb processzor</li>
+                <li>RAM: legalább 2 GB</li>
+                <li>Tárhely: minimum 100 MB szabad terület</li>
+                <li>Operációs rendszer: iOS 15 vagy újabb, Android 12 vagy újabb</li>
+            </ul>
+            
+            <h3>Ajánlott követelmények:</h3>
+            <ul>
+                <li>CPU: Dual-Core, 2.85 GHz vagy erősebb processzor</li>
+                <li>RAM: legalább 4 GB</li>
+                <li>Tárhely: legalább 200 MB szabad terület</li>
+                <li>Operációs rendszer: iOS 15 vagy újabb, Android 12 vagy újabb</li>
+            </ul>
+            
+            <p>Ezek a követelmények biztosítják, hogy az alkalmazás gyorsan és megbízhatóan fusson, még akkor is, ha a felhasználó nagyobb mérkőzési adatbázist böngész vagy egyszerre több funkciót használ.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">9.</span> Támogatottság és Kódminőség</h2>
+            <p>A projekt egyik kulcsfontosságú eleme az átláthatóság és a kód újrafelhasználhatósága. A Goal Diggers fejlesztőcsapata kiemelten fontosnak tartja, hogy a szoftver fenntartható és egyszerűen bővíthető legyen, hiszen a későbbi frissítések és új funkciók integrálása így sokkal hatékonyabban és gyorsabban megvalósítható.</p>
+            
+            <h3>Fejlesztési nyelv és dokumentáció:</h3>
+            <ul>
+                <li>Az alkalmazás C# nyelven készül, objektumorientált megközelítéssel.</li>
+                <li>Minden funkcióhoz külön dokumentáció tartozik, amely leírja a működését és a felhasználását.</li>
+                <li>A dokumentációt felhőalapú tárhelyen tárolják, így minden fejlesztő valós időben hozzáférhet és frissítheti.</li>
+                <li>A programkódot részletes magyarázó kommentek kísérik, amelyek elősegítik a későbbi karbantartást és bővítéseket.</li>
+            </ul>
+            
+            <h3>Kódolási irányelvek:</h3>
+            <ul>
+                <li>A konstansok nevei nagybetűvel íródnak a könnyebb megkülönböztetés érdekében.</li>
+                <li>A metódusnevek kisbetűvel kezdődnek, a további szavak első betűje viszont nagybetű (camelCase konvenció).</li>
+                <li>Az interfészek neve mindig nagy "I" betűvel kezdődik.</li>
+                <li>A változók és metódusok nevei beszédesek és egyértelműek, így segítve a kód olvashatóságát.</li>
+            </ul>
+            
+            <p>Ez a fegyelmezett, szabványokon alapuló fejlesztési gyakorlat hozzájárul ahhoz, hogy a Goal Diggers hosszú távon is megbízhatóen működjön, és a fejlesztés folyamatosan bővíthető legyen.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">10.</span> Fejlesztői környezet és eszközök</h2>
+            <p>A fejlesztéshez korszerű, iparági szabványoknak megfelelő szoftvereket és környezetet használunk, amelyek támogatják a gyors és hatékony munkavégzést.</p>
+            
+            <h3>Használt eszközök:</h3>
+            <ul>
+                <li>Visual Studio 2022: fő fejlesztői környezet, amelyet a mobilalkalmazás (iOS és Android) fejlesztésére használunk.</li>
+                <li>Visual Studio Code: a webes felületek és kiegészítő modulok készítéséhez.</li>
+                <li>Microsoft Office: statisztikák, jelentések és projektmenedzsment anyagok előállításához.</li>
+                <li>SQL adatbázis-kezelő: a mérkőzésadatok, tippek és felhasználói profilok megbízható tárolásához.</li>
+                <li>HTML és CSS: a webes felületek és adminisztrációs panelek kialakításához.</li>
+            </ul>
+            
+            <p>A kód újrafelhasználhatósága biztosítja, hogy ugyanaz a logika mindkét platformon (iOS és Android) működjön, ezzel jelentősen csökkentve a fejlesztési időt és a hibalehetőségeket.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">11.</span> Online Dokumentáció és Support Rendszer</h2>
+            <p>A Goal Diggers fontosnak tartja, hogy a felhasználók bármikor könnyen hozzáférjenek a szükséges információkhoz és segítséghez. Ezért a felület részeként létrehoztunk egy beépített "Support" menüpontot, amely több alfunkciót tartalmaz.</p>
+            
+            <h3>Főbb elemek:</h3>
+            <ul>
+                <li>Visszajelzés: itt várjuk a felhasználók által észlelt hibák bejelentését, valamint a fejlesztésekkel kapcsolatos javaslatokat és pozitív visszajelzéseket.</li>
+                <li>Segítség: a felhasználók azonnali támogatást kérhetnek például technikai problémák vagy inkompatibilitási gondok esetén.</li>
+                <li>Kapcsolatfelvétel: egyszerű kommunikációs csatornát biztosít a játékosok, a baráti ligák szervezői és az alkalmazás üzemeltetői között.</li>
+                <li>GYIK (Gyakran Ismételt Kérdések): egy folyamatosan frissített tudásbázis, amely a leggyakoribb problémákra kínál gyors megoldást.</li>
+                <li>Rólunk: bemutatja a fejlesztőcsapatot, az alkalmazás céljait és működésének alapelveit.</li>
+            </ul>
+            
+            <p>Ez a felépítés garantálja, hogy a felhasználók a lehető leggyorsabban választ kapjanak kérdéseikre, ezáltal csökkenjen a frusztráció és nőjön a felhasználói élmény.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">12.</span> Felhasznált kész komponensek</h2>
+            <p>A Goal Diggers alkalmazás több külső szolgáltatást és komponenst integrál a hatékony működés érdekében.</p>
+            
+            <div class="component-item">
+                <h4>Felhőalapú Üzemeltetési Platform</h4>
+                <p>Ez a szolgáltatás biztosítja alkalmazásunk online elérhetőségét, biztonságos adattárolását és a felhasználói fiókok kezelését. A szerverek folyamatos működését, biztonsági mentéseket és technikai támogatást is tartalmazza.</p>
+                <p><strong>Szolgáltató:</strong> WebHost Pro Kft.</p>
+                <p><strong>Költség:</strong> 89.500 Ft/év</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Felhasználói Felület Fejlesztés & Karbantartás</h4>
+                <p>A megoldás felelős az alkalmazás esztétikus megjelenéséért, intuitív kezelhetőségéért és reszponzív designjáért. A fejlesztőcsapat folyamatosan optimalizálja a felületet a felhasználói visszajelzések alapján.</p>
+                <p><strong>Szolgáltató:</strong> DesignTech Solutions Zrt.</p>
+                <p><strong>Költség:</strong> 49.990 Ft/hó</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Többszintű Fizetési Rendszer</h4>
+                <p>A prémium szolgáltatások eléréséhez és a biztonságos tranzakciók lebonyolításához integráltuk ezt a megoldást. A rendszer támogatja a bankkártyás fizetéseket, elektronikus pénztárcákat és előfizetéses számlázást.</p>
+                <p><strong>Szolgáltató:</strong> PaySecure Hungary Kft.</p>
+                <p><strong>Költség:</strong> Tranzakciós díj (1.9%) + havi fix díj 8.500 Ft</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Automatikus Számlázó Modul</h4>
+                <p>A felhasználói vásárlások és előfizetések nyilvántartásáért, számlakiállításáért és adókötelezettségek teljesítéséért felelős komponens. Teljes mértékben integrálódik a magyar adóhatóságok rendszereivel.</p>
+                <p><strong>Szolgáltató:</strong> InvoiceMaster Kft.</p>
+                <p><strong>Költség:</strong> 28.900 Ft/év</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Mobil Alkalmazás Distribúciós Csatornák</h4>
+                <p>Az alkalmazás eljuttatása a végfelhasználókhoz a legnépszerűbb mobil platformokon keresztül. A szolgáltatás magában foglalja az appok feltöltését, verziókezelését és értékesítési statisztikák nyomon követését.</p>
+                <p><strong>Szolgáltató:</strong> Google & Apple értékesítési platformjai</p>
+                <p><strong>Költség:</strong> Éves regisztrációs díj (Google: 12.000 Ft, Apple: 18.000 Ft) + értékesítési jutalék (15-30%)</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Értesítési és Kommunikációs Rendszer</h4>
+                <p>A felhasználói értesítések, e-mail kampányok és push üzenetek kezeléséért felelős megoldás. Biztosítja, hogy a fontos információk időben érkezzenek meg a felhasználókhoz.</p>
+                <p><strong>Szolgáltató:</strong> NotifyPro Kft.</p>
+                <p><strong>Költség:</strong> 6.500 Ft/hó (max. 10.000 felhasználóig)</p>
+            </div>
+            
+            <div class="component-item">
+                <h4>Analitikai és Statisztikai Modul</h4>
+                <p>A felhasználói viselkedés elemzésére, teljesítménymetrikák gyűjtésére és üzleti jelentések generálására szolgáló eszköz. Segítségével optimalizálhatjuk a felhasználói élményt és az üzleti folyamatokat.</p>
+                <p><strong>Szolgáltató:</strong> DataInsight Zrt.</p>
+                <p><strong>Költség:</strong> 14.800 Ft/hó</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">13.</span> Alkalmazott szabványok</h2>
+            <p>A Goal Diggers alkalmazás fejlesztése során számos jogszabályi előírást és technikai szabványt betartunk, hogy biztosítsuk a rendszer megbízhatóságát és megfelelőségét.</p>
+            
+            <h3>13.1. Kötelezően alkalmazandó jogszabályi előírások</h3>
+            <p>A szoftverfejlesztést és forgalmazást érintő törvényi kötelezettségek betartása elengedhetetlen. A magyar jogrendszer alapján a gyártó köteles minimális egyéves jótállási időszakot biztosítani a termékre vonatkozóan. Ez gyakorlatban azt jelenti, hogy a programnak ezen időtartam alatt minden funkcionális és műszaki követelménynek megfelelően kell működnie.</p>
+            
+            <h4>Jótállási feltételek:</h4>
+            <ul>
+                <li>A garancia kizárólag a rendeltetésszerű használat során fellépő hibákra vonatkozik</li>
+                <li>A garancia nem terjed ki a felhasználó által okozott meghibásodásokra</li>
+                <li>Vírusok, kártevő szoftverek által okozott károk nem esnek a jótállás hatálya alá</li>
+                <li>Nem megfelelő telepítés vagy környezeti feltételek miatti problémák szintén nem vonhatók felelősségre</li>
+            </ul>
+            
+            <h3>13.2. Technikai szabványok és protokollok</h3>
+            <h4>Biztonsági szabványok:</h4>
+            <ul>
+                <li>GDPR megfelelőség - személyes adatok védelme</li>
+                <li>HTTPS titkosított adatátvitel - SSL/TLS tanúsítvány alkalmazása</li>
+                <li>Adatbázis-titkosítás - AES-256 titkosítási szabvány</li>
+            </ul>
+            
+            <h4>Fejlesztési szabványok:</h4>
+            <ul>
+                <li>RESTful API architektúra - webes szolgáltatások egységes implementációja</li>
+                <li>JSON adatcsere-formátum - platformfüggetlen adatátvitel</li>
+                <li>Semantic Versioning 2.0.0 - verziószámozási rendszer</li>
+            </ul>
+            
+            <h4>Minőségbiztosítási szabványok:</h4>
+            <ul>
+                <li>ISO 25010 szoftverminőségi modell</li>
+                <li>Unit tesztelési szabványok - minimális 80% kódlefedettség</li>
+                <li>Kódolási konvenciók - ESLint, Pylint statikus kódanalízis</li>
+            </ul>
+            
+            <h4>Verzió követés:</h4>
+            <ul>
+                <li>Jelenlegi stabil verzió: 1.0.0</li>
+                <li>Fejlesztői verzió: 1.1.0-beta</li>
+                <li>Támogatott verziók: 1.0.x sorozat</li>
+            </ul>
+            
+            <h3>13.3. Folyamatos megfelelőségi ellenőrzés</h3>
+            <p>A fenti szabványok betartását rendszeres auditálással ellenőrizzük, melyet negyedévenként végez el egy független minőségbiztosítási csapat. A nem megfelelőségeket dokumentáljuk és azok kijavítását prioritásként kezeljük.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">14.</span> Szótár</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Angol kifejezés</th>
+                        <th>Magyar megfelelő</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>bug</td>
+                        <td>hiba egy számítógépes programban vagy rendszerben</td>
+                    </tr>
+                    <tr>
+                        <td>account</td>
+                        <td>felhasználói fiók</td>
+                    </tr>
+                    <tr>
+                        <td>update</td>
+                        <td>frissítés</td>
+                    </tr>
+                    <tr>
+                        <td>support</td>
+                        <td>Segítség, kapcsolat a felhasználó és a fejlesztő között</td>
+                    </tr>
+                    <tr>
+                        <td>szerver</td>
+                        <td>Olyan számítógép vagy szoftver, amely a weboldalakat szolgálja ki az interneten. Feladata a kliensek, például webböngészők által kért webes tartalmak, például HTML oldalak vagy képek továbbítása a hálózaton keresztül.</td>
+                    </tr>
+                    <tr>
+                        <td>GUI</td>
+                        <td>Az a felület, amit a felhasználó lát</td>
+                    </tr>
+                    <tr>
+                        <td>cloud</td>
+                        <td>Felhő alapú adattárolási modell</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Vízió dokumentum - H3</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html> 
