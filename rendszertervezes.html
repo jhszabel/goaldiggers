@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendszertervezés - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #4CAF50;
+            margin: 1.2rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .subsection-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Rendszertervezés</h1>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html">H2</a></li>
+            <li><a href="h3.html">H3</a></li>
+            <li><a href="h4.html">H4</a></li>
+            <li><a href="h5.html">H5</a></li>
+            <li><a href="analizis-modell.html">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html" class="active">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section>
+            
+            <h2><span class="section-icon">1.</span> Bevezetés</h2>
+            <p>A dokumentum célja, hogy részletesen bemutassa a Goal Diggers futballtippelő alkalmazás fejlesztésének rendszertervét. A rendszerterv az analízis modellben megfogalmazott funkcionális követelményeket konkrét technikai és logikai megoldások szintjére bontja le. Ennek segítségével a fejlesztőcsapat pontosan meghatározhatja, milyen technológiákat, adatstruktúrákat és folyamatokat kell megvalósítani.</p>
+            
+            <p>A dokumentum egyaránt szól a fejlesztőknek, a projektmenedzsmentnek és az üzemeltető csapatnak, akik a későbbi karbantartást végzik. Célja, hogy egyértelmű, átlátható és jól strukturált képet adjon a rendszer működéséről, komponenseiről és integrációiról.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> Rendszerarchitektúra</h2>
+            <p>A rendszer háromrétegű architektúrát alkalmaz: a kliensoldali réteg, az üzleti logikai réteg és az adatkezelési réteg elkülönülten működik. Ez a felépítés biztosítja a rugalmasságot, a karbantarthatóságot és a könnyű skálázhatóságot.</p>
+            
+            <h3><span class="subsection-icon">2.1.</span> Technológiai stack</h3>
+            <ul>
+                <li><strong>Kliensoldal (Frontend):</strong> React technológia - dinamikus, gyors és reszponzív felhasználói élmény</li>
+                <li><strong>Üzleti logika (Backend):</strong> Django REST Framework - REST API-kon keresztül szolgálja ki az adatokat</li>
+                <li><strong>Adatbázis réteg:</strong> PostgreSQL - megbízhatóan kezeli a nagy mennyiségű adatot</li>
+            </ul>
+            
+            <h3><span class="subsection-icon">2.2.</span> Kommunikáció és integráció</h3>
+            <p>A rétegek közötti kommunikáció JSON alapú, HTTPS-en keresztül történik, így az adatok biztonságosan és gyorsan továbbíthatók. A rendszer szerkezete lehetővé teszi, hogy a kliens és a szerver egymástól függetlenül fejleszthető legyen.</p>
+            
+            <h3><span class="subsection-icon">2.3.</span> Üzemeltetés és konténerizáció</h3>
+            <p>A rendszer konténerizált formában, Docker segítségével üzemel, ami megkönnyíti a telepítést és az üzemeltetést különböző környezetekben. Az architektúra célja, hogy hosszú távon is megbízható és fejleszthető alapot biztosítson a projektnek.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> Adatbázis-terv</h2>
+            <p>Az adatbázis-terv a rendszer egyik legfontosabb pillére, amely minden lényeges információt tárol. A tervezés során relációs modellt alkalmaztunk, ahol a táblák közötti kapcsolatok idegen kulcsokkal lettek meghatározva.</p>
+            
+            <h3><span class="subsection-icon">3.1.</span> Főbb entitások</h3>
+            <ul>
+                <li><strong>Felhasználó (User):</strong> Felhasználói fiókok és profiladatok</li>
+                <li><strong>Tipp (Prediction):</strong> Felhasználói tippek mérkőzésekre</li>
+                <li><strong>Mérkőzés (Match):</strong> Sportmérkőzések és eredmények</li>
+                <li><strong>Liga (League):</strong> Versenycsoportok és közösségek</li>
+                <li><strong>Ranglista (Leaderboard):</strong> Pontszámok és helyezések</li>
+            </ul>
+            
+            <h3><span class="subsection-icon">3.2.</span> Adatbázis tervezési elvek</h3>
+            <p>Az adatbázis sémája a harmadik normálforma elveit követi, ezzel biztosítva az adatredundancia minimalizálását és az adatintegritást. Az adatok lekérdezését indexek és materializált nézetek gyorsítják, hogy a nagy adathalmazok esetében is rövid válaszidőt kapjunk.</p>
+            
+            <h3><span class="subsection-icon">3.3.</span> Biztonsági megfontolások</h3>
+            <p>Az adatbázis szerver biztonságos hálózati környezetben működik, hozzáférése csak az API-szerver számára engedélyezett. Az adatbázis-terv dokumentációja tartalmazza a tábla- és mezőszintű leírásokat is, ami támogatja a fejlesztői és üzemeltetői munkát.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.</span> Biztonsági és hitelesítési megoldások</h2>
+            <p>A rendszer biztonsága kiemelt prioritás, ezért több védelmi szintet alkalmazunk.</p>
+            
+            <h3><span class="subsection-icon">4.1.</span> Hitelesítés és jogosultságkezelés</h3>
+            <p>A felhasználói hitelesítés JSON Web Token (JWT) alapú, amely lehetővé teszi a biztonságos és stateless kommunikációt a kliens és a szerver között. Minden jelszó titkosítva tárolódik, bcrypt algoritmus segítségével, így még adatbázis-szivárgás esetén sem olvashatók ki a jelszavak.</p>
+            
+            <h3><span class="subsection-icon">4.2.</span> Kommunikációs biztonság</h3>
+            <p>A rendszer HTTPS protokollon keresztül kommunikál, ami megakadályozza az adathalász és lehallgatási támadásokat. A szerveroldalon tűzfal és IP-szintű korlátozások védik a kritikus erőforrásokat.</p>
+            
+            <h3><span class="subsection-icon">4.3.</span> Webes biztonsági rétegek</h3>
+            <p>A fejlesztés során OWASP irányelvek alapján kerültek bevezetésre a leggyakoribb biztonsági védekezések, például az SQL injection, XSS és CSRF támadások elleni védelem. A biztonsági auditokat rendszeresen végrehajtjuk, és az esetleges sebezhetőségeket azonnal javítjuk.</p>
+            
+            <h3><span class="subsection-icon">4.4.</span> Adminisztratív biztonság</h3>
+            <p>Az adminfelület csak az arra jogosult felhasználók számára érhető el, és naplózza az összes tevékenységet.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> Deployment és DevOps folyamat</h2>
+            <p>A telepítési folyamat teljesen automatizált, így minimális emberi beavatkozást igényel.</p>
+            
+            <h3><span class="subsection-icon">5.1.</span> CI/CD Pipeline</h3>
+            <p>A GitHub Actions futtatja a CI/CD pipeline-t, amely minden commit után ellenőrzi a kódot, lefuttatja a teszteket, és sikeres build esetén automatikusan deploy-olja az alkalmazást.</p>
+            
+            <h3><span class="subsection-icon">5.2.</span> Konténerizáció és üzemeltetés</h3>
+            <p>A Docker és Docker Compose segítségével az alkalmazás több konténerből áll, így külön kezelhető a backend, frontend és adatbázis komponens. Ez biztosítja a hordozhatóságot és a gyors visszaállíthatóságot.</p>
+            
+            <h3><span class="subsection-icon">5.3.</span> Felhő üzemeltetés és monitorozás</h3>
+            <p>A rendszer a felhőben kerül üzembe helyezésre, SSL tanúsítvánnyal és automatikus biztonsági mentésekkel. Az üzemeltetést Prometheus és Grafana alapú monitorozás segíti, amely valós idejű riasztásokat küld a rendszerhibákról.</p>
+            
+            <h3><span class="subsection-icon">5.4.</span> Tesztelési környezet</h3>
+            <p>Minden deployment előtt staging környezetben történik a tesztelés, ahol a fejlesztők validálják a funkciókat. Ez a folyamat biztosítja, hogy az éles környezetbe csak stabil és ellenőrzött verziók kerüljenek.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">6.</span> Teljesítmény és skálázhatóság</h2>
+            <p>A rendszer célja, hogy nagy számú egyidejű felhasználót is képes legyen kiszolgálni stabil válaszidő mellett.</p>
+            
+            <h3><span class="subsection-icon">6.1.</span> Aszinkron feldolgozás</h3>
+            <p>Az aszinkron feldolgozást Celery és Redis segítségével valósítjuk meg, így a háttérfeladatok, például API-frissítések és pontszámítások, nem terhelik a fő kiszolgálást.</p>
+            
+            <h3><span class="subsection-icon">6.2.</span> Tartalomkézbesítés és gyorsítótár</h3>
+            <p>A statikus tartalmak CDN-en keresztül kerülnek kiszolgálásra, ezzel csökkentve a szerverre nehezedő terhelést. Az adatbázis- és API-lekérdezéseket optimalizált SQL utasítások gyorsítják.</p>
+            
+            <h3><span class="subsection-icon">6.3.</span> Skálázhatósági megoldások</h3>
+            <p>A rendszer horizontálisan skálázható, vagyis több szerver példány futtatható párhuzamosan, load balancerrel elosztva a kéréseket. A teljesítményt mérő eszközök segítségével rendszeres stressztesztek zajlanak, amelyek célja a gyenge pontok azonosítása.</p>
+            
+            <h3><span class="subsection-icon">6.4.</span> Optimalizálás</h3>
+            <p>A gyorsítótárak és az aszinkron feldolgozás kombinációja biztosítja, hogy a válaszidők még csúcsterhelésnél is optimálisak maradjanak.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">7.</span> Tesztelés és minőségbiztosítás</h2>
+            <p>A fejlesztés során egység-, integrációs és rendszer szintű tesztek is készülnek.</p>
+            
+            <h3><span class="subsection-icon">7.1.</span> Automatizált tesztelés</h3>
+            <p>A frontend komponenseket Jest és React Testing Library segítségével teszteljük, a backend logikát pedig Pytest-tel és Django beépített tesztmoduljával. Az automatizált tesztelés célja, hogy minden funkció stabilan működjön, és a regressziós hibák minimalizálva legyenek.</p>
+            
+            <h3><span class="subsection-icon">7.2.</span> Pipeline integráció</h3>
+            <p>A pipeline részeként minden build előtt a tesztek automatikusan lefutnak. A manuális tesztelés során a fejlesztők és tesztelők valós felhasználói szcenáriókat vizsgálnak meg, például hibás tipp beadását, API-leállást vagy időzóna-kezelést.</p>
+            
+            <h3><span class="subsection-icon">7.3.</span> Kódminőség és visszakövethetőség</h3>
+            <p>A minőségbiztosítás része a kódreview is, ahol minden új funkciót legalább egy másik fejlesztő ellenőriz. A cél a magas kódminőség, az olvashatóság és a karbantarthatóság biztosítása. Minden hibát issue formájában rögzítünk, így a visszakövethetőség is garantált.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">8.</span> Karbantartás és jövőbeli fejlesztések</h2>
+            <p>A karbantartási folyamat során rendszeres frissítéseket és hibajavításokat hajtunk végre.</p>
+            
+            <h3><span class="subsection-icon">8.1.</span> Hibakezelés és naplózás</h3>
+            <p>A naplózási modul segítségével a hibák gyorsan azonosíthatók, és a fejlesztők számára részletes információt nyújtanak.</p>
+            
+            <h3><span class="subsection-icon">8.2.</span> Bővíthetőség és új funkciók</h3>
+            <p>Az architektúra moduláris felépítése miatt a rendszer bővíthető új funkciókkal, például push értesítésekkel, statisztikai kimutatásokkal vagy gamifikációs elemekkel. A jövőbeli célok között szerepel a mobilalkalmazás fejlesztése és a nemzetközi piacra lépés.</p>
+            
+            <h3><span class="subsection-icon">8.3.</span> Mesterséges intelligencia integráció</h3>
+            <p>A fejlesztés további iránya a mesterséges intelligencia alapú tippajánló modul integrálása. Ez a funkció korábbi statisztikák alapján segítené a felhasználókat a tippelésben.</p>
+            
+            <h3><span class="subsection-icon">8.4.</span> Folyamatos karbantartás</h3>
+            <p>A karbantartás részét képezi az adatbiztonsági auditok és a teljesítménytesztek ismétlése is, hogy a rendszer hosszú távon megbízható maradjon. A dokumentációk folyamatos frissítése biztosítja, hogy az új fejlesztők gyorsan átláthassák a projekt működését.</p>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Rendszertervezés</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

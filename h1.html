@@ -153,6 +153,11 @@
             margin: 1.5rem 0 0.5rem;
         }
         
+        h4 {
+            color: #4CAF50;
+            margin: 1.2rem 0 0.5rem;
+        }
+        
         p {
             margin-bottom: 1rem;
         }
@@ -252,29 +257,37 @@
             background-color: #f0fff0;
         }
         
-        .projektterv-content {
-            line-height: 1.8;
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
         }
         
-        .projektterv-section {
-            margin-bottom: 2.5rem;
-        }
-        
-        .projektterv-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .projektterv-section h3 {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .projektterv-section h3:before {
-            content: "•";
-            color: #2E8B57;
-            font-size: 2rem;
+        .section-icon {
+            display: inline-block;
             margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .subsection-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
         }
         
         @media (max-width: 768px) {
@@ -322,7 +335,7 @@
         </div>
         
         <div class="header-content">
-            <h1>Projektterv</h1>
+            <h1>Vízió dokumentum</h1>
         </div>
     </div>
     
@@ -344,83 +357,80 @@
     </nav>
     
     <div class="container">
-        <section class="projektterv-content">
-            <h2 align="center">Projektterv</h2>
+        <section>
             
-            <div class="projektterv-section">
-                <h3>1. Csoport tagjai, struktúrája</h3>
-                <ul>
-                    <li>Magyar Dávid</li>
-                    <li>Juhász Ábel Lehel</li>
-                    <li>Kis-Molnár Ákos</li>
-                    <li>Pocsai Ákos</li>
-                    <li>Fazekas Kristóf</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>2. Fejlesztési terv: mérföldkövek, eredmények</h3>
-                <ul>
-                    <li>1. fázis (1. hét): Funkcionális követelmények és tervezés</li>
-                    <li>2. fázis (2–3. hét): Adatmodell és architektúra elkészítése</li>
-                    <li>3. fázis (4–5. hét): Backend implementáció (felhasználók, tippek, ranglista)</li>
-                    <li>4. fázis (6–7. hét): Frontend implementáció, felhasználói élmény kialakítása</li>
-                    <li>5. fázis (8. hét): Tesztelés, dokumentáció, bemutató előkészítése</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>3. Programozói nyelvek, fejlesztő eszközök</h3>
-                <ul>
-                    <li>Backend: Python (Django REST Framework)</li>
-                    <li>Frontend: React + JavaScript</li>
-                    <li>Adatbázis: PostgreSQL</li>
-                    <li>Fejlesztő eszközök: Visual Studio Code, GitHub, Docker</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>4. Használni tervezett eszközök, technikák</h3>
-                <ul>
-                    <li>Verziókezelés: Git, GitHub</li>
-                    <li>CI/CD: GitHub Actions (automatikus build, teszt)</li>
-                    <li>Adatkezelés: REST API, JSON formátum</li>
-                    <li>Tesztelés: Unit tesztek, funkcionális tesztek</li>
-                    <li>Projektmenedzsment: Trello, Teams</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>5. Leendő produktumok és létrejöttük ideje</h3>
-                <ul>
-                    <li>Követelmény specifikáció – 1. hét vége</li>
-                    <li>Rendszerterv – 3. hét vége</li>
-                    <li>Alfa verzió (backend) – 5. hét vége</li>
-                    <li>Béta verzió (frontend + backend) – 7. hét vége</li>
-                    <li>Tesztelt, demózható rendszer + dokumentáció – 8. hét vége</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>6. Tesztelési követelmények</h3>
-                <ul>
-                    <li>Belépés, regisztráció és adatbiztonság ellenőrzése</li>
-                    <li>Tippelési logika (pontozás, időkorlát) helyes működése</li>
-                    <li>Ranglista és statisztikák pontossága</li>
-                    <li>Felhasználói felület kompatibilitása különböző böngészőkön és eszközökön</li>
-                    <li>Stresszteszt minimális terheléssel (pl. több felhasználó egyidejű aktivitása)</li>
-                </ul>
-            </div>
-            
-            <div class="projektterv-section">
-                <h3>7. Információforrások</h3>
-                <ul>
-                    <li>Django REST Framework dokumentáció</li>
-                    <li>React & MDN Web Docs</li>
-                    <li>PostgreSQL dokumentáció</li>
-                    <li>Stack Overflow, GitHub open-source példák</li>
-                </ul>
-            </div>
+            <h2><span class="section-icon">1.</span> Csoport tagjai, struktúrája</h2>
+            <ul>
+                <li>Magyar Dávid</li>
+                <li>Juhász Ábel Lehel</li>
+                <li>Kis-Molnár Ákos</li>
+                <li>Pocsai Ákos</li>
+                <li>Fazekas Kristóf</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> Fejlesztési terv: mérföldkövek, eredmények</h2>
+            <ul>
+                <li><strong>1. fázis (1. hét):</strong> Funkcionális követelmények és tervezés</li>
+                <li><strong>2. fázis (2–3. hét):</strong> Adatmodell és architektúra elkészítése</li>
+                <li><strong>3. fázis (4–5. hét):</strong> Backend implementáció (felhasználók, tippek, ranglista)</li>
+                <li><strong>4. fázis (6–7. hét):</strong> Frontend implementáció, felhasználói élmény kialakítása</li>
+                <li><strong>5. fázis (8. hét):</strong> Tesztelés, dokumentáció, bemutató előkészítése</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> Programozói nyelvek, fejlesztő eszközök</h2>
+            <ul>
+                <li><strong>Backend:</strong> Python (Django REST Framework)</li>
+                <li><strong>Frontend:</strong> React + JavaScript</li>
+                <li><strong>Adatbázis:</strong> PostgreSQL</li>
+                <li><strong>Fejlesztő eszközök:</strong> Visual Studio Code, GitHub, Docker</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.</span> Használni tervezett eszközök, technikák</h2>
+            <ul>
+                <li><strong>Verziókezelés:</strong> Git, GitHub</li>
+                <li><strong>CI/CD:</strong> GitHub Actions (automatikus build, teszt)</li>
+                <li><strong>Adatkezelés:</strong> REST API, JSON formátum</li>
+                <li><strong>Tesztelés:</strong> Unit tesztek, funkcionális tesztek</li>
+                <li><strong>Projektmenedzsment:</strong> Trello, Teams</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> Leendő produktumok és létrejöttük ideje</h2>
+            <ul>
+                <li><strong>Követelmény specifikáció</strong> – 1. hét vége</li>
+                <li><strong>Rendszerterv</strong> – 3. hét vége</li>
+                <li><strong>Alfa verzió (backend)</strong> – 5. hét vége</li>
+                <li><strong>Béta verzió (frontend + backend)</strong> – 7. hét vége</li>
+                <li><strong>Tesztelt, demózható rendszer + dokumentáció</strong> – 8. hét vége</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">6.</span> Tesztelési követelmények</h2>
+            <ul>
+                <li>Belépés, regisztráció és adatbiztonság ellenőrzése</li>
+                <li>Tippelési logika (pontozás, időkorlát) helyes működése</li>
+                <li>Ranglista és statisztikák pontossága</li>
+                <li>Felhasználói felület kompatibilitása különböző böngészőkön és eszközökön</li>
+                <li>Stresszteszt minimális terheléssel (pl. több felhasználó egyidejű aktivitása)</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">7.</span> Információforrások</h2>
+            <ul>
+                <li>Django REST Framework dokumentáció</li>
+                <li>React & MDN Web Docs</li>
+                <li>PostgreSQL dokumentáció</li>
+                <li>Stack Overflow, GitHub open-source példák</li>
+            </ul>
         </section>
     </div>
     

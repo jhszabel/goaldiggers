@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vízió dokumentum - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #4CAF50;
+            margin: 1.2rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .subsection-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Vízió dokumentum</h1>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html">H2</a></li>
+            <li><a href="h3.html">H3</a></li>
+            <li><a href="h4.html">H4</a></li>
+            <li><a href="h5.html" class="active">H5</a></li>
+            <li><a href="analizis-modell.html">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section>
+            
+            <h2><span class="section-icon">1.</span> Bevezetés az OMT Tervezési Fázisba</h2>
+            <p>Az OMT (Objektum-orientált modellezési és tervezési) fázisban a Goal Diggers rendszer elemzési modelljének finomítását és az implementációs részletek kialakítását végezzük. A cél egy olyan logikai és fizikai architektúra létrehozása, amely a C#/.NET környezet sajátosságait kihasználva biztosítja a skálázhatóságot, a moduláris felépítést és a kódminőséget. Ez a dokumentum az átmenetet biztosítja a mit (specifikáció) és a hogyan (implementáció) kérdései között.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> A Rendszer Vezérlésének Kidolgozása</h2>
+            <p>A vezérlés megtervezése a rendszer dinamikáját és az objektumok közötti kommunikáció mechanizmusait írja le. Különös figyelmet fordítunk az aszinkron és valós idejű kommunikációs mintákra.</p>
+            
+            <h3><span class="subsection-icon">2.1.</span> Aktív, Passzív és Vezérlő Objektumok</h3>
+            <ul>
+                <li><strong>Aktív objektumok (Processzorok):</strong> Ezek felelnek az időzített vagy folyamatos feladatokért.
+                    <ul>
+                        <li><strong>Példa:</strong> DataUpdateService — egy aktív objektum, amely időzítve lekérdezi a külső forrásból érkező mérkőzésadatokat és indítja a frissítési láncot. Működése aszinkron szálon történik, elkerülve a fő végrehajtási szál blokkolását.</li>
+                    </ul>
+                </li>
+                <li><strong>Passzív objektumok (Adatréteg):</strong> Adatszerkezetek, amelyek a rendszer aktuális állapotát tárolják.
+                    <ul>
+                        <li><strong>Példa:</strong> Match, UserTip, League, Notification entitások. Működésük alapvetően CRUD (Create, Read, Update, Delete) műveletekre korlátozódik.</li>
+                    </ul>
+                </li>
+                <li><strong>Vezérlő objektumok (Controller/Manager):</strong> Az üzleti logika végrehajtásának koordinátorai, a bemeneteket (frontend) és a szolgáltatásokat (aktív/passzív objektumok) kötik össze.
+                    <ul>
+                        <li><strong>Példa:</strong> TipManagerController — ellenőrzi a tippelési határidőket, delegálja a tippet az adatbázisnak és szükség esetén indítja a RankingCalculator szolgáltatást.</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3><span class="subsection-icon">2.2.</span> Üzenetváltások és Láthatósági Mechanizmusok</h3>
+            <p>A kommunikáció a RESTful API és a WebSocket technológiákra épül. A láthatóságot a C# modulok (internal kulcsszó) és a Dependency Injection (DI) szabályozza.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Résztvevő Objektumok</th>
+                        <th>Dinamika / Minta</th>
+                        <th>Cél</th>
+                        <th>Üzenetváltás típusa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Felhasználói Akció</td>
+                        <td>Frontend-Controller Service</td>
+                        <td>Bejelentkezés, Liga létrehozása, Tipp leadása.</td>
+                        <td>RESTful Request/Response</td>
+                    </tr>
+                    <tr>
+                        <td>Real-time Adatfrissítés</td>
+                        <td>DataUpdateService NotificationService Frontend</td>
+                        <td>Élő eredmények, ranglista változások adatfrissítés nélkül.</td>
+                        <td>Observer/Publisher Subscriber (WebSocket)</td>
+                    </tr>
+                    <tr>
+                        <td>Aszinkron Feladat</td>
+                        <td>TipManagerController RankingCalculator</td>
+                        <td>Nagy mérkőzésszám esetén a pontszámítás eltolása.</td>
+                        <td>Aszinkron metódushívás</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> Osztálykapcsolatok Implementálása</h2>
+            <p>Az OMT modellben megfogalmazott kapcsolatok C# nyelvi elemekkel történő megvalósítása a design minták alkalmazásával történik, növelve a kód rugalmasságát.</p>
+            
+            <h3><span class="subsection-icon">3.1.</span> Kapcsolatok Implementációs Finomságai</h3>
+            <ul>
+                <li><strong>Asszociáció (One-to-Many):</strong> (pl. League és több User tag)
+                    <ul>
+                        <li><strong>Implementáció:</strong> Az adatbázisban Foreign Key, C# környezetben Navigációs Tulajdonságok (pl. public virtual ICollection<User> Members).</li>
+                    </ul>
+                </li>
+                <li><strong>Öröklődés (Inheritance):</strong> (pl. BaseUser - FreeUser és PremiumUser)
+                    <ul>
+                        <li><strong>Implementáció:</strong> C# osztályöröklődés (: BaseUser). Az üzleti logika elkülönítéséhez Strategy Design Pattern alkalmazása a jogkezelésnél (pl. különböző híváslimitek a FreeUser és PremiumUser számára).</li>
+                    </ul>
+                </li>
+                <li><strong>Aggregáció/Kompozíció:</strong> (pl. Match és Score objektum)
+                    <ul>
+                        <li><strong>Implementáció:</strong> A Score (eredmény) szorosan a Match objektumhoz kötődik. Ezt értéktípusok (Value Objects) vagy belső osztályok használatával valósítjuk meg, elkerülve a felesleges entitás tárolást.</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3><span class="subsection-icon">3.2.</span> Speciális Implementációs Osztályok és Szolgáltatások</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Osztály neve</th>
+                        <th>Szerepe / Felelőssége</th>
+                        <th>Design Minta</th>
+                        <th>A H3-ban specifikált Funkcióhoz Kapcsolódás</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>RankingCalculator</td>
+                        <td>A H3-ban leírt pontozási logika végrehajtása és a ranglisták szortírozása.</td>
+                        <td>Strategy Pattern (különböző pontozási stratégiák ligánként)</td>
+                        <td>Pontozási rendszer [cite: 70, 71]</td>
+                    </tr>
+                    <tr>
+                        <td>SimplePayIntegrationService</td>
+                        <td>Biztosítja a titkosított kapcsolatot a fizetési szolgáltatóval (Simple Pay).</td>
+                        <td>Adapter Pattern (külső API illesztése)</td>
+                        <td>Fizetési integráció [cite: 45, 46, 77]</td>
+                    </tr>
+                    <tr>
+                        <td>NotificationFactory</td>
+                        <td>Értesítési objektumok (e-mail, push, in-app) létrehozása a felhasználói beállítások alapján.</td>
+                        <td>Factory Method</td>
+                        <td>Értesítések [cite: 65, 66]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.</span> Az Elemek Modulokba Szervezése</h2>
+            <p>A projektet egy rétegelt architektúrába (Layered Architecture) szervezzük, ahol a függőségek felülről lefelé haladnak (Presentation → Service → Infrastructure).</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modul (Csomag) neve</th>
+                        <th>Tartalom / Rétegbeli Elhelyezkedés</th>
+                        <th>Cél / Előny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GoalDiggers.Core</td>
+                        <td>Entitások, Value Objects, közös interfészek, általános kivételek.</td>
+                        <td>Absztrakciós réteg – független a technológiától, a projekt magja.</td>
+                    </tr>
+                    <tr>
+                        <td>GoalDiggers.Service</td>
+                        <td>Üzleti logika (Manager/Controller), RankingCalculator, NotificationService.</td>
+                        <td>Fő üzleti réteg – itt él a Goal Diggers specifikus logikája.</td>
+                    </tr>
+                    <tr>
+                        <td>GoalDiggers.Infrastructure</td>
+                        <td>Adatbázis-hozzáférés, API integrációk, külső kommunikációs protokollok (pl. SimplePay).</td>
+                        <td>Adatréteg – a külső rendszerek kezelése, a Core-ra épül.</td>
+                    </tr>
+                    <tr>
+                        <td>GoalDiggers.Presentation</td>
+                        <td>Frontend kód (WebUI/MobileUI), React komponensek, adatkötés.</td>
+                        <td>Megjelenítési réteg – Felhasználói élmény biztosítása (UI/UX).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> Implementáció és Tesztelési Terv</h2>
+            
+            <h3><span class="subsection-icon">5.1.</span> Skeleton / Prototípus Implementáció és Módszertan</h3>
+            <p>Az implementáció az Agile módszertan elvei szerint, kis iterációkkal (Scrum/Kanban) indul. Az első lépés egy Minimum Viable Product (MVP) Skeleton létrehozása.</p>
+            
+            <ol>
+                <li><strong>Backend Skeleton:</strong> A GoalDiggers.Core és GoalDiggers.Infrastructure adatbázis-kapcsolatának (SQL) és a fő entitásoknak a kialakítása.</li>
+                <li><strong>Frontend Prototípus:</strong> Egy Reszponzív UI váz elkészítése a fő navigációs elemekkel (Meccsek, Tippelés, Ranglista) és a bejelentkezési ablakkal.</li>
+                <li><strong>Funkcionális Váz:</strong> Sikeres bejelentkezés (mock adatbázisból) és egy statikus mérkőzéslista megjelenítése.</li>
+            </ol>
+            
+            <h3><span class="subsection-icon">5.2.</span> Részletes Tesztelési Terv és Elemek</h3>
+            <p>A tesztelési fázisban a H4-ben megfogalmazott szempontokon túl a tesztelés a legkritikusabb, bevételt vagy felhasználói adatokat érintő funkciókra fókuszál. A kódlefedettség célja 90% az üzleti logikát tartalmazó Service modulban.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tesztelési Fókusz</th>
+                        <th>Kritikus Teszteset</th>
+                        <th>Tesztelhető Implementációs Elem</th>
+                        <th>Teszt típusa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pontszámítás Érvényessége</td>
+                        <td>Helytelen kimenetel (pl. döntetlen helyett hazai győzelem) tippelt eredménye.</td>
+                        <td>RankingCalculator</td>
+                        <td>Unit Test (Jest/xUnit)</td>
+                    </tr>
+                    <tr>
+                        <td>Többligás Pontszámítás</td>
+                        <td>Egy felhasználó pontjainak helyes aggregálása a különböző ligákból.</td>
+                        <td>LeagueController</td>
+                        <td>Integrációs Test (Cypress)</td>
+                    </tr>
+                    <tr>
+                        <td>Pénzügyi Tranzakció</td>
+                        <td>A felhasználó nem kapja meg a prémium jogokat a sikeres Simple Pay tranzakció után.</td>
+                        <td>SimplePayIntegrationService</td>
+                        <td>End-to-End (e2e) Test</td>
+                    </tr>
+                    <tr>
+                        <td>Felhasználói Visszajelzés</td>
+                        <td>Hibaüzenet jelenik meg, ha a felhasználó a határidő lejárta után próbál tippelni.</td>
+                        <td>TipValidator és Frontend Feedback</td>
+                        <td>UI/UX Test</td>
+                    </tr>
+                    <tr>
+                        <td>Terhelés/Megbízhatóság</td>
+                        <td>A szerver válaszidő (Latency) növekedése nagy forgalom idején (döntő).</td>
+                        <td>Redundáns szerverek [cite: 108]</td>
+                        <td>Load Test</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Vízió dokumentum - H5</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

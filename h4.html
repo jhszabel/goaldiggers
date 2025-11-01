@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vízió dokumentum - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #2E8B57;
+            margin: 1.2rem 0 0.7rem;
+            font-size: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .projektterv-content {
+            line-height: 1.8;
+        }
+        
+        .projektterv-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .projektterv-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight-box {
+            background-color: #f0fff0;
+            border-left: 4px solid #2E8B57;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tech-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .tech-card h4 {
+            color: #2E8B57;
+            margin-top: 0;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Hozzáadva: H3 stílusú számozás */
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .subsection-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        .use-case-img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Vízió dokumentum</h1>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html">H2</a></li>
+            <li><a href="h3.html">H3</a></li>
+            <li><a href="h4.html" class="active">H4</a></li>
+            <li><a href="h5.html">H5</a></li>
+            <li><a href="analizis-modell.html">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section class="projektterv-content">
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">1.</span> Bevezetés</h2>
+                <div class="highlight-box">
+                    <p>A frontend implementáció célja, hogy a rendszer felhasználói számára vizuálisan vonzó, könnyen kezelhető és funkcionálisan átgondolt felületet biztosítson. A Goal Diggers alkalmazás esetében ez különösen fontos, hiszen a platform nem csupán adatok és tippek megjelenítésére szolgál, hanem közösségi élményt is teremt.</p>
+                </div>
+                
+                <p>A fejlesztés során a legfőbb szempont a felhasználói élmény (UX) és a felület (UI) harmóniájának megteremtése volt, amely egyszerre biztosít esztétikus megjelenést és praktikus működést.</p>
+                
+                <p>A frontend réteg felelős a felhasználó és az alkalmazás közötti interakciókért. Ez az a rész, amit a játékos lát, használ, és amin keresztül megtapasztalja a rendszer funkcionalitását. A cél egy olyan felület megvalósítása, amely azonnal érthető, intuitív, gyorsan reagál és minden eszközön egységes élményt nyújt. A design alapelvei között szerepel a minimalizmus, a vizuális hierarchia, valamint a felhasználói visszajelzésekre épülő folyamatos finomhangolás.</p>
+                
+                <h3><span class="subsection-icon">1.1.</span> Fő célkitűzések</h3>
+                <ul>
+                    <li>Felhasználóbarát, intuitív kezelőfelület létrehozása</li>
+                    <li>Modern, esztétikus vizuális megjelenés kialakítása</li>
+                    <li>Gyors betöltési idő és reszponzív működés minden platformon</li>
+                    <li>Egységes élmény biztosítása mobilon, tableten és asztali eszközön</li>
+                    <li>A felhasználói élmény (UX) középpontba helyezése</li>
+                </ul>
+                
+                <h3><span class="subsection-icon">1.2.</span> Frontend technológiák</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>HTML5</h4>
+                        <p>A weboldal szerkezetének és tartalmának alapja. Logikai felépítés, elemek elrendezése, hozzáférhetőség biztosítása.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>CSS3</h4>
+                        <p>A vizuális megjelenésért felelős stílusleíró nyelv. Reszponzív design, animációk és színek kezelése.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>JavaScript (ES6+)</h4>
+                        <p>Az interaktív funkciók megvalósításának alapja. Űrlapok, tippek kezelése, dinamikus adatfrissítés és animációk.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h4>React.js</h4>
+                        <p>Modern komponensalapú frontend keretrendszer. A felület moduláris felépítését és a hatékony újrarenderelést biztosítja.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">2.</span> A frontend szerepe a rendszerben</h2>
+                <p>A frontend az alkalmazás látható és közvetlenül használható része, amelyen keresztül a felhasználók kapcsolatba lépnek a rendszerrel. Ez felelős az adatok megjelenítéséért, a felhasználói interakciók feldolgozásáért és az élmény vizuális közvetítéséért. Az alkalmazás célja, hogy a backend által biztosított információkat (például meccseredményeket, statisztikákat és tippeket) érthető és élvezetes formában jelenítse meg.</p>
+                
+                <p>A frontend implementáció során a legnagyobb kihívás a funkcionalitás és a design egyensúlyának megteremtése volt. A rendszernek gyorsan, hibamentesen és látványosan kellett reagálnia a felhasználói műveletekre. A fejlesztők célja az volt, hogy a játékosok minden műveletet – legyen az tipp leadása, ranglista megtekintése vagy barátok hozzáadása – zökkenőmentesen és örömmel hajtsanak végre.</p>
+                
+                <h3><span class="subsection-icon">2.1.</span> Felhasználói interakciók</h3>
+                <ul>
+                    <li>Meccsek böngészése és eredmények megtekintése valós időben</li>
+                    <li>Tippek megadása és módosítása interaktív felületen</li>
+                    <li>Baráti ligák kezelése és közösségi funkciók elérése</li>
+                    <li>Ranglisták és statisztikák megtekintése dinamikus frissítéssel</li>
+                    <li>Értesítések és visszajelzések megjelenítése a felhasználó tevékenységei alapján</li>
+                </ul>
+                
+                <h3><span class="subsection-icon">2.2.</span> Adatáramlás a rendszerben</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Elem</th>
+                            <th>Leírás</th>
+                            <th>Kapcsolódás</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>A felhasználói felület, ahol az adatok vizuálisan megjelennek.</td>
+                            <td>Kapcsolatot tart a backend API-val az adatok lekéréséhez és megjelenítéséhez.</td>
+                        </tr>
+                        <tr>
+                            <td>Backend</td>
+                            <td>Az adatok feldolgozásáért és tárolásáért felelős szerveroldal.</td>
+                            <td>JSON formátumban szolgáltatja az adatokat a frontend számára.</td>
+                        </tr>
+                        <tr>
+                            <td>Adatbázis</td>
+                            <td>A felhasználói profilokat, tippeket és meccsadatokat tárolja.</td>
+                            <td>A backend rétegen keresztül érhető el, a frontend számára közvetett módon.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">3.</span> Felhasználói élmény (UX) alapelvek</h2>
+                <p>A felhasználói élmény (User Experience – UX) kialakítása kulcsfontosságú a Goal Diggers alkalmazás sikeréhez, hiszen az élvezetes használat közvetlenül befolyásolja a felhasználók megtartását és aktivitását. Az UX tervezés során az volt a fő cél, hogy a platform minden funkciója logikus, átlátható és könnyen elérhető legyen, függetlenül attól, hogy a játékos milyen eszközről használja az alkalmazást. A tervezés az empátiára és a felhasználók viselkedésének megértésére épül, hiszen egy tippelős és közösségi applikációnál különösen fontos, hogy a folyamat természetesnek és gördülékenynek hasson.</p>
+                
+                <p>A felhasználói visszajelzések figyelembevételével a tervezés iteratív módon zajlott: minden egyes funkció és felület több körben került tesztelésre, finomításra és optimalizálásra. Az interakciók során kiemelt figyelmet kaptak a vizuális visszajelzések (pl. animációk, színbeli változások), amelyek növelik az alkalmazás játékosságát és a felhasználó bevonódását. A cél az volt, hogy a rendszer ne csak működjön, hanem élményt is nyújtson — minden kattintás, mozdulat és információátadás egy egységes, kellemes folyamat részévé váljon.</p>
+                
+                <h3><span class="subsection-icon">3.1.</span> Fő UX alapelvek</h3>
+                <ul>
+                    <li><strong>Egyszerűség:</strong> A felhasználói útvonalak rövidek és egyértelműek, felesleges lépések nélkül.</li>
+                    <li><strong>Konzisztencia:</strong> Az egyes oldalakon azonos elemek, színek és ikonográfia segítik a tájékozódást.</li>
+                    <li><strong>Visszajelzés:</strong> Minden művelethez azonnali vizuális vagy hang alapú visszajelzés tartozik.</li>
+                    <li><strong>Elérhetőség:</strong> Az alkalmazás akadálymentesített, kontrasztos és jól olvasható minden kijelzőn.</li>
+                    <li><strong>Folyamatosság:</strong> Az élmény minden platformon egységes, a mobil- és webes verziók között nincs törés.</li>
+                </ul>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">4.</span> Felhasználói felület (UI) kialakítása</h2>
+                <p>A felhasználói felület (User Interface – UI) megtervezése során a cél egy modern, játékos, mégis professzionális megjelenés megvalósítása volt. A dizájn letisztult, kontrasztos és vizuálisan egységes, hogy minden felhasználó gyorsan eligazodjon az oldalon. A vizuális koncepció központi eleme a sportos dinamika: a színek, ikonok és tipográfia mind a versengés és a közösségi játék hangulatát tükrözik.</p>
+                
+                <p>A felület minden komponense reszponzív módon készült, így a megjelenés és az interakciós elemek automatikusan alkalmazkodnak a kijelző méretéhez. A navigáció logikusan épül fel, a legfontosabb funkciók (pl. tippek, eredmények, ranglisták, ligák) mindig egyetlen kattintással elérhetők. Az UI nem csak szép, hanem funkcionális is: a vizuális elemek támogató szerepet töltenek be az információ gyors feldolgozásában és a döntéshozatalban.</p>
+                
+                <h3><span class="subsection-icon">4.1.</span> Színpaletta és tipográfia</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Elem</th>
+                            <th>Leírás</th>
+                            <th>Szerepe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fő színek</td>
+                            <td>Zöld (#1EB980) és fehér (#FFFFFF)</td>
+                            <td>A frissesség, sportosság és átláthatóság jegyében. A zöld kiemeli az interaktív elemeket, a fehér háttér biztosítja az olvashatóságot.</td>
+                        </tr>
+                        <tr>
+                            <td>Kiegészítő színek</td>
+                            <td>Sötétszürke (#2E2E2E) és világosszürke (#EAEAEA)</td>
+                            <td>Háttérblokkok és szöveges tartalmak kiemelése, fókuszpontok létrehozása.</td>
+                        </tr>
+                        <tr>
+                            <td>Betűtípus</td>
+                            <td>Roboto Sans</td>
+                            <td>Modern, jól olvasható és rugalmas betűcsalád. Egységes arculat és tiszta megjelenés biztosítása minden platformon.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">5.</span> Reszponzív megjelenés és eszközfüggetlen működés</h2>
+                <p>A Goal Diggers alkalmazás teljes egészében reszponzív elrendezéssel készült, hogy minden felhasználó számára azonos minőségű élményt biztosítson, függetlenül attól, hogy milyen eszközről (okostelefon, tablet, laptop vagy asztali gép) használja. A reszponzív kialakítás célja, hogy a felhasználói felület elemei automatikusan alkalmazkodjanak a különböző kijelzőméretekhez, felbontásokhoz és orientációkhoz, miközben a funkcionalitás és az esztétika egységes marad.</p>
+                
+                <p>A fejlesztés során mobil-first megközelítést alkalmaztunk, tehát a tervezés alapja a mobilos nézet volt, amelyből fokozatosan építettük fel a nagyobb kijelzőkre optimalizált verziókat. Ez garantálja, hogy az alkalmazás gyorsan betöltődik, jól olvasható és egyszerűen kezelhető kisebb képernyőkön is. A layoutok dinamikusan változnak a CSS grid és flexbox rendszerek segítségével, így a tartalmak mindig jól tagoltan és áttekinthetően jelennek meg.</p>
+                
+                <h3><span class="subsection-icon">5.1.</span> Fő reszponzív elvek</h3>
+                <ul>
+                    <li><strong>Mobil-first tervezés:</strong> Az oldal legelőször mobilra készült el, majd bővült tablet és desktop nézetekre.</li>
+                    <li><strong>Rugalmas gridrendszer:</strong> CSS Grid és Flexbox használata a dinamikus méretezéshez.</li>
+                    <li><strong>Optimalizált képek:</strong> Különböző felbontású képek automatikus betöltése az eszköztípus alapján.</li>
+                    <li><strong>Érintésbarát interakciók:</strong> Nagy, lekerekített gombok és gesztusalapú navigáció a mobilos élményhez.</li>
+                    <li><strong>Reszponzív tipográfia:</strong> A szövegméretek automatikusan skálázódnak, hogy mindig jól olvashatók legyenek.</li>
+                </ul>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">6.</span> Interaktív funkciók és dinamika</h2>
+                <p>A Goal Diggers felhasználói felülete nem statikus, hanem élő és dinamikus. Az interaktív funkciók célja, hogy a felhasználók bevonódjanak a rendszer működésébe, visszajelzéseket kapjanak, és közösségi szinten is kapcsolatba léphessenek egymással. Az alkalmazás minden pontján azonnali reakciók (real-time visszajelzések, animációk, hangjelzések) segítik a gyors eligazodást és fokozzák az élményt.</p>
+                
+                <p>A fejlesztés során a JavaScript és a modern frontend-keretrendszerek (pl. React, Vue vagy Angular) lehetőségeit használtuk ki, hogy az alkalmazás valós időben reagáljon a felhasználói műveletekre, és adatfrissítés nélkül lehessen tippelni, statisztikát megtekinteni vagy kommunikálni. A WebSocket technológia lehetővé teszi az élő eredmények és ranglisták frissítését, így a játékosok mindig naprakész információkat kapnak.</p>
+                
+                <h3><span class="subsection-icon">6.1.</span> Fő interaktív elemek</h3>
+                <ul>
+                    <li>Valós idejű pontszámfrissítés: A felhasználók pontjai és ligastatisztikái automatikusan frissülnek.</li>
+                    <li>Értesítési rendszer: Push és e-mail értesítések figyelmeztetnek a közelgő határidőkre és mérkőzésekre.</li>
+                    <li>Chat funkció: Beépített üzenetküldés a ligatagok között, hogy megosszák tippjeiket és véleményüket.</li>
+                    <li>Animációk: Finom átmenetek és vizuális mozgások a felhasználói interakciók során.</li>
+                    <li>Valós idejű ranglista: A tippelési eredmények azonnal megjelennek az összesített rangsorban.</li>
+                </ul>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">7.</span> Tesztelés és hibakezelés</h2>
+                <p>A Goal Diggers frontend implementációjának egyik legfontosabb eleme a folyamatos tesztelés, amely biztosítja, hogy az alkalmazás megbízhatóan, hibamentesen és gyorsan működjön minden platformon. A tesztelés célja, hogy még a fejlesztési fázisban kiszűrje az esetleges funkcionális hibákat, logikai eltéréseket és kompatibilitási problémákat, mielőtt az alkalmazás éles környezetbe kerülne. Az automatizált és manuális tesztelés kombinációját alkalmazzuk, hogy a különböző használati forgatókönyveket és valós élethelyzeteket is lefedjük.</p>
+                
+                <h3><span class="subsection-icon">7.1.</span> Fő tesztelési típusok</h3>
+                <ul>
+                    <li><strong>Egységtesztek (Unit Testing):</strong> Az egyes komponensek és funkciók külön-külön kerülnek ellenőrzésre, hogy minden rész önállóan is hibamentesen működjön.</li>
+                    <li><strong>Integrációs tesztek:</strong> Vizsgálják, hogyan kommunikálnak egymással a modulok (pl. tippelés, API-hívások, adatmegjelenítés).</li>
+                    <li><strong>Felhasználói felület tesztelése (UI/UX):</strong> Manuális és automata tesztek értékelik, hogy a kezelőfelület logikus, esztétikus és könnyen használható-e.</li>
+                    <li><strong>Reszponzivitási teszt:</strong> Különböző eszközökön, böngészőkben és felbontásokon történik az oldal vizsgálata.</li>
+                    <li><strong>Teljesítményteszt:</strong> A betöltési idő, animációk futása és API-válaszidők kerülnek mérésre, hogy a felhasználói élmény folyamatos maradjon.</li>
+                </ul>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">8.</span> Teljesítményoptimalizálás és biztonság</h2>
+                <p>A teljesítményoptimalizálás célja, hogy az alkalmazás gyorsan és hatékonyan működjön, miközben minimalizálja az erőforrás-felhasználást. A Goal Diggers felületén minden elem — a képek, betűtípusok, szkriptek és API-hívások — optimalizálva van a gyors betöltés és gördülékeny felhasználói élmény érdekében. A fejlesztés során kiemelten fontosnak tartotta a gyors első betöltési idő (First Contentful Paint) és az interaktivitás (Time to Interactive) minimalizálása.</p>
+                
+                <p>A kódminőséget moduláris struktúra és aszinkron adatbetöltés biztosítja, így a felhasználó nem vár feleslegesen a tartalmakra. Az adatokat cache rendszer tárolja, így a gyakran használt elemek (pl. ligák, pontszámok, profiladatok) azonnal megjelennek. A JavaScript fájlok minifikálása és a képek tömörítése további gyorsulást eredményez, miközben az élmény vizuálisan változatlan marad.</p>
+                
+                <h3><span class="subsection-icon">8.1.</span> Teljesítményoptimalizálási technikák</h3>
+                <ul>
+                    <li>Kódminifikálás és tömörítés: A CSS és JS fájlok automatikus méretcsökkentése a betöltési idő csökkentéséért.</li>
+                    <li>Lazy loading: Csak a képernyőn látható elemek betöltése, így gyorsabb oldalindulás érhető el.</li>
+                    <li>Aszinkron adatlekérés: Az API-hívások párhuzamosan futnak, csökkentve a várakozási időt.</li>
+                    <li>CDN használata: A statikus fájlok globálisan elérhető szervereken tárolódnak, így gyorsabban töltődnek be.</li>
+                </ul>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">9.</span> Felhasználói visszajelzések és továbbfejlesztési lehetőségek</h2>
+                <p>A felhasználói visszajelzések a fejlesztési folyamat kulcselemei, hiszen segítségükkel mérhető, mennyire felel meg az alkalmazás a valódi igényeknek. A Goal Diggers frontend fejlesztése során több körben gyűjtöttünk adatokat a felhasználói tapasztalatokról — mind kvalitatív, mind kvantitatív módszerekkel. Tesztcsoportokat vontunk be, akik különböző eszközökön és hálózati környezetben próbálták ki az alkalmazást, így széleskörű tapasztalatokat tudtunk rögzíteni. A cél az volt, hogy a rendszer használhatósága, sebessége és vizuális megjelenése is megfeleljen a mai webes elvárásoknak.</p>
+                
+                <p>A visszajelzéseket három fő szempont mentén értékeltük: felhasználói élmény (UX), funkcionalitás és megbízhatóság. A UX kategóriában külön figyelmet fordítottunk a navigáció egyszerűségére és az interaktív elemek elhelyezésére. A tesztalanyok többsége pozitívan értékelte az oldal struktúráját és a betöltési sebességet, azonban javasolták, hogy bizonyos gombok kapjanak erősebb vizuális kiemelést. Az ilyen visszajelzések alapján iteratív fejlesztési ciklusokat vezettünk be, amelyek lehetővé tették, hogy a hibák vagy gyengeségek gyorsan javításra kerüljenek.</p>
+                
+                <h3><span class="subsection-icon">9.1.</span> Felhasználói tesztelés eredményei</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vizsgált terület</th>
+                            <th>Felhasználói értékelés (1–5)</th>
+                            <th>Megjegyzések / Fejlesztési irány</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Betöltési sebesség</td>
+                            <td>4.8</td>
+                            <td>Gyors oldalindulás, de mobilon néha késik az animáció.</td>
+                        </tr>
+                        <tr>
+                            <td>Átláthatóság</td>
+                            <td>4.5</td>
+                            <td>Javasolt több vizuális tagolás és kontrasztos színek használata.</td>
+                        </tr>
+                        <tr>
+                            <td>Reszponzivitás</td>
+                            <td>4.7</td>
+                            <td>Kiváló működés tableten és mobilon, de néhány ikon elcsúszik régi böngészőkben.</td>
+                        </tr>
+                        <tr>
+                            <td>Interaktív elemek működése</td>
+                            <td>4.6</td>
+                            <td>Az események gyorsan reagálnak, de a visszajelző üzenetek késhetnek gyenge hálózat esetén.</td>
+                        </tr>
+                        <tr>
+                            <td>Összfelhasználói elégedettség</td>
+                            <td>4.7</td>
+                            <td>A legtöbb felhasználó „könnyen kezelhetőnek” és „professzionálisnak” írta le az alkalmazást.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="projektterv-section">
+                <h2><span class="section-icon">10.</span> Összefoglalás és jövőbeli fejlesztési irányok</h2>
+                <p>A Goal Diggers frontend fejlesztése során a legfontosabb cél az volt, hogy a felhasználók számára egy gyors, modern és élményszerű webalkalmazás jöjjön létre. A projekt során sikeresen integráltuk a reszponzív design elveit, a biztonsági megfontolásokat, valamint a teljesítményoptimalizálás szempontjait. A folyamatos tesztelés és felhasználói visszajelzések beépítése révén olyan rendszer jött létre, amely nemcsak funkcionálisan stabil, hanem vizuálisan is letisztult és korszerű.</p>
+                
+                <p>A frontend fejlesztési fázisban külön hangsúlyt kaptak az animációk, az interaktív komponensek és az intuitív navigációs struktúra kialakítása. A cél az volt, hogy a felhasználók minden eszközön — legyen az mobil, tablet vagy asztali számítógép — ugyanolyan zökkenőmentes élményt kapjanak. A fejlesztés során figyelembe vettük a modern böngészők közötti kompatibilitást is, hogy az alkalmazás hosszú távon fenntartható és bővíthető legyen.</p>
+                
+                <h3><span class="subsection-icon">10.1.</span> Jövőbeli fejlesztési tervek</h3>
+                <ul>
+                    <li><strong>PWA (Progressive Web App) funkciók:</strong> Offline működés és értesítések bevezetése a még kényelmesebb felhasználói élmény érdekében.</li>
+                    <li><strong>Dark Mode támogatás:</strong> Alternatív témák és kontrasztos megjelenítési módok a szemkímélő böngészéshez.</li>
+                    <li><strong>AI-alapú javaslatok:</strong> Gépi tanulási algoritmusok a személyre szabott tippajánlásokhoz és statisztikai elemzésekhez.</li>
+                    <li><strong>Közösségi funkciók:</strong> Barátlista, megosztási lehetőségek és csoportos kihívások integrálása.</li>
+                    <li><strong>Nemzetközi verzió:</strong> Többnyelvű felhasználói felület, amely megnyitja az alkalmazást a nemzetközi közösség számára.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Vízió dokumentum - H4</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

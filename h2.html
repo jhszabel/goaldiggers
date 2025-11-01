@@ -170,6 +170,12 @@
             margin: 1.5rem 0 0.5rem;
         }
         
+        h4 {
+            color: #2E8B57;
+            margin: 1.2rem 0 0.7rem;
+            font-size: 1.2rem;
+        }
+        
         p {
             margin-bottom: 1rem;
         }
@@ -283,6 +289,29 @@
             font-size: 1.2rem;
         }
         
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        .use-case-img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -349,6 +378,7 @@
         </ul>
     </nav>
     
+    <div class="container">
         <section>
             <h2><span class="section-icon">1.</span> Bevezetés</h2>
             <p>A Goal Diggers egy modern, játékos közösségi platform, amely új szintre emeli a futballmeccsek követését és élvezetét. Az alkalmazás segítségével a felhasználók egyszerűen és átlátható módon tippelhetnek a közelgő mérkőzések eredményeire, versenyezhetnek barátaikkal vagy más játékosokkal, és közben aktív részesei lehetnek egy futballrajongókból álló közösségnek.</p>
@@ -652,7 +682,7 @@
         </section>
         
         <section>
-            <h2><span class="section-icon">4.2</span> A termék használatának előnyei</h2>
+            <h2><span class="section-icon">4.</span> A termék használatának előnyei</h2>
             <p>A focis tippelős alkalmazás számos előnyt kínál mind az alkalmi felhasználóknak, mind a rendszeres játékosoknak.</p>
             
             <p>Az alkalmazás nem csupán szórakoztató, hanem kényelmes és hasznos eszköz a futball-rajongók számára, amely egyszerre támogatja az élő sportélményt és a közösségi interakciót.</p>
@@ -709,7 +739,7 @@
         </section>
         
         <section>
-            <h2><span class="section-icon">4.3</span> Feltételezések és függőségek</h2>
+            <h2><span class="section-icon">5.</span> Feltételezések és függőségek</h2>
             <p>A focis tippelős alkalmazás sikeres fejlesztése és üzemeltetése bizonyos feltételezések teljesülésén és külső tényezőkön alapul.</p>
             
             <p>Ezeket fontos rögzíteni, mert a projekt során és a működés közben is hatással lehetnek az alkalmazás stabilitására és a felhasználói élményre.</p>
@@ -751,14 +781,14 @@
         </section>
         
         <section>
-            <h2><span class="section-icon">5.</span> A végtermék jellemzői</h2>
+            <h2><span class="section-icon">6.</span> A végtermék jellemzői</h2>
             <p>A fejlesztés során létrejött végtermék egy focis tippelős alkalmazás és a hozzá tartozó webes platform, amely a labdarúgás rajongói számára készült.</p>
             
             <p>A rendszer célja, hogy a felhasználók egyszerűen követhessék a mérkőzéseket, előre megtippelhessék az eredményeket, és közösségi versenyeken vehessenek részt.</p>
             
             <p>A végtermék a modern technológiákra, a felhőalapú szolgáltatásokra és a felhasználói élményre helyezi a hangsúlyt, hogy hosszú távon stabil, biztonságos és szórakoztató élményt nyújtson.</p>
             
-            <h3>5.1 Általános jellemzők</h3>
+            <h3>6.1 Általános jellemzők</h3>
             <p>A végtermék két fő részből áll:</p>
             <ol>
                 <li><strong>Mobilalkalmazás</strong> – Androidra és iOS-re is elérhető, natív módon fejlesztett alkalmazás.</li>
@@ -767,7 +797,7 @@
             
             <p>A mobilalkalmazás és a webes felület teljesen szinkronizált, vagyis a felhasználó bármelyik platformon folytathatja a megkezdett tevékenységeit (pl. tippelés, toplista követése).</p>
             
-            <h3>5.2 Funkcionális jellemzők</h3>
+            <h3>6.2 Funkcionális jellemzők</h3>
             
             <h4>Tippelés</h4>
             <p>A rendszer fő funkciója a meccsek eredményének megtippelése.</p>
@@ -831,7 +861,7 @@
                 <li>Sötét mód (kényelmesebb éjszakai használat során).</li>
             </ul>
             
-            <h3>5.4 Technológiai jellemzők</h3>
+            <h3>6.3 Technológiai jellemzők</h3>
             <ul>
                 <li>Backend: Node.js + Express vagy hasonló keretrendszer</li>
                 <li>Frontend: React Native (mobil), React.js (web)</li>
@@ -853,12 +883,12 @@
         </section>
         
         <section>
-            <h2><span class="section-icon">9.</span> Kockázat lista</h2>
+            <h2><span class="section-icon">8.</span> Kockázat lista</h2>
             <p>A focis tippelős alkalmazás fejlesztése és üzemeltetése során számos olyan kockázat merülhet fel, amely hatással lehet a projekt sikerére, az alkalmazás minőségére vagy a felhasználói élményre.</p>
             
             <p>A kockázatok feltárása és időben történő kezelése elengedhetetlen a megbízható, biztonságos és hosszú távon fenntartható működés biztosításához.</p>
             
-            <h3>9.1 Technikai kockázatok</h3>
+            <h3>8.1 Technikai kockázatok</h3>
             <p>A technikai kockázatok olyan problémákból erednek, amelyek a rendszer infrastruktúrájával, fejlesztési környezetével vagy külső szolgáltatásokkal kapcsolatosak.</p>
             
             <ul>
@@ -870,7 +900,7 @@
         </section>
         
         <section>
-            <h2><span class="section-icon">10.</span> Szótár</h2>
+            <h2><span class="section-icon">9.</span> Szótár</h2>
             <table>
                 <thead>
                     <tr>

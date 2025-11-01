@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analízis modell - Goal Diggers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #2E8B57;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a.active {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        nav a:hover {
+            background-color: #f0fff0;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #2E8B57;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0fff0;
+        }
+        
+        h3 {
+            color: #3CB371;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #4CAF50;
+            margin: 1.2rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2E8B57 0%, #3CB371 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2E8B57;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3CB371;
+            transform: scale(1.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #2E8B57;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f0fff0;
+        }
+        
+        .highlight {
+            background-color: #f0fff0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #2E8B57;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .subsection-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 8px;
+            color: #2E8B57;
+        }
+        
+        .component-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3CB371;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Goal Diggers logo">
+            </a>
+        </div>
+        
+        <div class="header-content">
+            <h1>Analízis Modell</h1>
+        </div>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="h1.html">H1</a></li>
+            <li><a href="h2.html">H2</a></li>
+            <li><a href="h3.html">H3</a></li>
+            <li><a href="h4.html">H4</a></li>
+            <li><a href="h5.html">H5</a></li>
+            <li><a href="analizis-modell.html" class="active">Analízis modell</a></li>
+            <li><a href="rendszertervezes.html">Rendszertervezés</a></li>
+            <li><a href="implementacio.html">Implementáció</a></li>
+            <li><a href="tesztek.html">Tesztek</a></li>
+            <li><a href="munkanaplo.html">Munkanapló</a></li>
+            <li><a href="felhasznaloi-kezikonyv.html">Felhasználói kézikönyv</a></li>
+            <li><a href="szotar.html">Szótár</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section>
+            
+            <h2><span class="section-icon">1.</span> Bevezetés</h2>
+            <p>Ez az oldal a Goal Diggers rendszer analízis modelljét mutatja be, amely a tippelő alkalmazás funkcionális és technikai követelményeit ismerteti.</p>
+            
+            <p>Célunk egy olyan interaktív webes rendszer megtervezése, amelyben a felhasználók sportmérkőzések eredményeire tippelhetnek, és valós idejű pontozással versenyezhetnek egymással.</p>
+            
+            <p>Az analízis fázis során meghatároztuk a fő komponenseket, az adatmodelleket, az állapotokat és a működési folyamatokat, amelyek biztosítják a rendszer megbízható működését.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2.</span> Osztálymodell (analízis)</h2>
+            <p>Az analízis során a rendszer fő objektumait azonosítottuk, amelyek meghatározzák az adatszerkezetet és a logikai kapcsolatokat. A cél egy olyan moduláris és bővíthető osztályrendszer kialakítása volt, amely támogatja a skálázhatóságot és egyszerűsíti a további fejlesztést. Az osztálymodell a Django REST backend struktúráját is előkészíti, mivel az adatbázis-táblák ezekből az osztályokból származnak.</p>
+            
+            <p>Az analízis modell célja, hogy meghatározza a rendszer főbb entitásait (osztályokat), azok tulajdonságait és kapcsolatait. A Goal Diggers rendszer objektumorientált struktúrája a valóságos működési logikát tükrözi: a felhasználók, ligák, mérkőzések és tippek szorosan összefüggnek, miközben külön feladatköröket is ellátnak. Az osztályok közötti kapcsolatokat az asszociációk, aggregációk és függőségek írják le, amelyek a rendszer viselkedését modellezik a későbbi fejlesztési fázis számára.</p>
+            
+            <h3><span class="subsection-icon">2.1.</span> Felhasználó osztály</h3>
+            <p>A Felhasználó osztály a rendszer legfontosabb entitása, mivel minden interakció ezen keresztül történik. Egyedi azonosítóval, névvel, e-mail címmel, titkosított jelszóval, valamint opcionális profilképpel és beállításokkal rendelkezik. A felhasználó regisztrálhat, bejelentkezhet, tippeket adhat le, ligákhoz csatlakozhat és megtekintheti a ranglistát. Az adatok biztonságos, titkosított formában kerülnek tárolásra.</p>
+            
+            <p>Kapcsolatok szintjén a felhasználó több tipphez kapcsolódik (egy–több viszony), és tagja lehet több ligának is. Fő metódusai: bejelentkezés(), tippelés(), profilFrissítés() és ligaCsatlakozás().</p>
+            
+            <h3><span class="subsection-icon">2.2.</span> Liga osztály</h3>
+            <p>A Liga osztály a közösségi aspektust modellezi. A felhasználók ligákba szerveződhetnek, ahol egymás ellen versenyeznek pontjaik alapján. Egy liga tartalmazza a nevét, leírását, létrehozás dátumát, valamint a tagok listáját. Lehet nyilvános vagy privát (meghívókódos) működésű.</p>
+            
+            <p>A Liga kapcsolatban áll a Felhasználó és Ranglista osztályokkal. Fő műveletei: újLigaLétrehoz(), tagFelvétel(), tagEltávolítás(), pontFrissítés().</p>
+            
+            <h3><span class="subsection-icon">2.3.</span> Mérkőzés osztály</h3>
+            <p>A Mérkőzés osztály a valós sporteseményeket reprezentálja. Egy mérkőzéshez két csapat, kezdési időpont, helyszín, aktuális és végleges eredmény tartozik. Az adatok automatikusan az Eredmény–API-ból érkeznek.</p>
+            
+            <p>A mérkőzés lehet „tervezett", „folyamatban" vagy „lezárult" állapotban, ami befolyásolja a tippelés lehetőségét és a pontszámítást. Fő metódusai: eredményFrissítés(), állapotVáltás(), APIImport().</p>
+            
+            <h3><span class="subsection-icon">2.4.</span> Tipp osztály</h3>
+            <p>A Tipp osztály a felhasználói aktivitást reprezentálja. Minden tipp egy felhasználóhoz és egy mérkőzéshez kapcsolódik. Tartalmazza a tippelt eredményt, a beküldés időpontját és az aktuális állapotot („Létrehozva", „Beküldve", „Értékelt").</p>
+            
+            <p>A fő metódusok: tippBeküldés(), tippÉrtékelés(), pontSzámítás(). A tippek automatikusan értékelődnek, és a pontok frissülnek a ranglistán.</p>
+            
+            <h3><span class="subsection-icon">2.5.</span> Ranglista osztály</h3>
+            <p>A Ranglista osztály a versenyrendszer záróeleme. Minden ligához tartozik egy saját ranglista, amely automatikusan frissül a mérkőzések lezárásakor. A pontozás algoritmusa figyelembe veszi a helyes kimenetelre, pontos eredményre és gólkülönbségre adott tippeket is.</p>
+            
+            <p>Fő metódusai: pontFrissítés(), helyezésSzámítás(), ligaSzintűÖsszesítés(). A ranglista nemcsak statisztikai eszköz, hanem a közösségi élmény kulcseleme is.</p>
+            
+            <div class="highlight">
+                <h4>Főbb osztályok összefoglalása:</h4>
+                <ul>
+                    <li><strong>Felhasználó (User):</strong> központi entitás, amelyhez minden más objektum kapcsolódik.</li>
+                    <li><strong>Liga (League):</strong> a közösségi versenyzés egysége, amely több felhasználót és mérkőzést fog össze.</li>
+                    <li><strong>Mérkőzés (Match):</strong> az alapegység, amely az Eredmény–API-ból érkezik.</li>
+                    <li><strong>Tipp (Prediction):</strong> a felhasználói előrejelzés objektuma, amely a mérkőzésekhez és felhasználókhoz kapcsolódik.</li>
+                    <li><strong>Ranglista (Leaderboard):</strong> a ligák eredményeinek összesített megjelenítése, valós idejű frissítéssel.</li>
+                </ul>
+                <p>Az osztályok között többirányú kapcsolatok vannak: Felhasználó–Tipp (1–N), Mérkőzés–Tipp (1–N), Liga–Ranglista (1–1). Ez az architektúra biztosítja a skálázhatóságot és az adatbázis-hatékonyságot.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3.</span> Rendszer működése – szekvenciák</h2>
+            <p>A rendszer működését szekvenciadiagramok segítségével modelleztük, amelyek bemutatják a szereplők és komponensek közti üzenetváltásokat. Bár a diagramok helyett itt szöveges leírás található, minden folyamat lépésről lépésre követhető.</p>
+            
+            <p>A Goal Diggers rendszer működése több, egymáshoz kapcsolódó folyamaton alapul, amelyek a felhasználói interakcióktól kezdve az adminisztrációs műveleteken át a háttérrendszerekig terjednek. A következőkben bemutatjuk a rendszer tipikus szekvenciáit, részletesen leírva, hogyan kommunikálnak az egyes komponensek egymással a különböző szituációkban.</p>
+            
+            <h3><span class="subsection-icon">3.1.</span> Felhasználói szcenáriók</h3>
+            <p>A leggyakoribb, ideális működési folyamat a regisztrált felhasználó szemszögéből indul. A felhasználó megnyitja az alkalmazást, bejelentkezik, majd kiválaszt egy közelgő mérkőzést, amelyre tippet kíván leadni. A rendszer valós időben lekéri az elérhető mérkőzéseket az Eredmény–API-ból, és az aktuális státuszuk alapján jeleníti meg őket.</p>
+            
+            <p>Miután a felhasználó leadja tippjét, a rendszer ellenőrzi, hogy a mérkőzés még nem kezdődött-e el, majd rögzíti a tippet az adatbázisban, időbélyeggel együtt. A tipp a „Beküldve" állapotba kerül, és a háttérfolyamat figyeli a mérkőzés végét. Amikor az API jelzi, hogy a mérkőzés lezárult, a rendszer automatikusan pontozza a tippet, majd frissíti a ranglistát a ligán belül. Ez az adatfrissítés valós időben történik, így a felhasználók azonnal látják az új helyezéseket.</p>
+            
+            <h3><span class="subsection-icon">3.2.</span> Hibás esetek és kivételek kezelése</h3>
+            <p>A rendszer számos hibakezelési szcenárióval rendelkezik. Amennyiben a felhasználó tippet próbál leadni egy már lezárt vagy kezdődő mérkőzésre, a rendszer figyelmeztetést küld, és a műveletet megakadályozza. A jelszó- vagy e-mailhiba esetén a bejelentkezési folyamat megszakad, és a felhasználó hibaüzenetet kap, amely segíti a probléma azonosítását.</p>
+            
+            <p>Az API-kapcsolat hibája esetén a rendszer cache-elt adatokat használ, amíg az élő kapcsolat helyre nem áll. Ez biztosítja, hogy a felhasználói élmény folyamatos maradjon, és a tippelési funkció ne szakadjon meg. Emellett a háttérfolyamat naplózza az ilyen eseményeket, így az admin később elemezheti az esetleges hibákat.</p>
+            
+            <h3><span class="subsection-icon">3.3.</span> Szekvenciadiagramok szöveges leírása</h3>
+            <div class="highlight">
+                <h4>Felhasználó → Rendszer → API folyamat:</h4>
+                <ol>
+                    <li>A felhasználó belép a rendszerbe (input: e-mail, jelszó).</li>
+                    <li>A rendszer hitelesíti az adatokat, majd hozzáférést ad a felhasználói fiókhoz.</li>
+                    <li>A felhasználó kiválasztja a „Következő mérkőzések" menüpontot.</li>
+                    <li>A rendszer lekéri az adatokat az Eredmény–API-ból, majd megjeleníti a mérkőzéseket.</li>
+                    <li>A felhasználó leadja a tippet, a rendszer validálja, majd elmenti.</li>
+                    <li>A mérkőzés lezárulta után az API friss adatot küld, a rendszer újraszámolja a pontokat, és frissíti a ranglistát.</li>
+                </ol>
+                
+                <h4>Admin → Rendszer → Adatbázis folyamat:</h4>
+                <ol>
+                    <li>Az admin bejelentkezik a kezelőfelületre.</li>
+                    <li>A rendszer ellenőrzi az admin jogosultságait.</li>
+                    <li>Az admin új mérkőzést ad hozzá, vagy meglévőt módosít.</li>
+                    <li>A változtatások azonnal mentésre kerülnek az adatbázisban.</li>
+                    <li>A felhasználói felület automatikusan frissül az új adatokkal.</li>
+                </ol>
+            </div>
+            
+            <h3><span class="subsection-icon">3.4.</span> Folyamatok admin szemszögből</h3>
+            <p>Az admin feladata a rendszer adatainak karbantartása és a felhasználói aktivitás felügyelete. Az admin kezelheti a mérkőzéseket, jóváhagyhat vagy törölhet tippeket, valamint moderálhatja a felhasználói interakciókat. Emellett az admin felügyeli az API-hívásokat és az adatbázis integritását is. Az adminisztrációs modul naplózza az összes módosítást, így visszakövethető, ki és mikor végzett változtatást a rendszerben.</p>
+            
+            <p>A moderáció során az admin figyelemmel kíséri a közösségi funkciókat (ligák, profilok), és szükség esetén korlátozhatja a szabálytalanul viselkedő felhasználók hozzáférését. Az admin panelen megjelenő statisztikák segítik az üzemeltetőt abban, hogy lássa a rendszer teljesítményét, a tippelési aktivitást és az esetleges hibaarányokat.</p>
+            
+            <h3><span class="subsection-icon">3.5.</span> Bejelentkezés és hitelesítés</h3>
+            <p>A felhasználó megadja e-mail címét és jelszavát, majd az űrlap elküldése után a frontend egy POST kérést küld a backend API felé. A szerver összeveti a megadott adatokat a PostgreSQL adatbázisban tárolt hash-elt jelszóval. Sikeres azonosítás esetén a rendszer JWT tokent generál, amelyet a frontend elment a session tárolóba. Ezzel a tokennel a további kérések hitelesített módon történnek, például tippeléskor vagy profilmódosításkor.</p>
+            
+            <h3><span class="subsection-icon">3.6.</span> Tippelés folyamata</h3>
+            <p>A tippelés a rendszer egyik legfontosabb interakciója. A felhasználó a frontend felületen kiválasztja a mérkőzést, majd beírja az általa várt eredményt (pl. 2–1). A frontend validálja az űrlapot, és az adatokat elküldi a backendnek. A szerver eltárolja a tippet az adatbázisban, időbélyeggel és az adott mérkőzéshez kapcsolva. Amikor a mérkőzés véget ér, az API-ból beérkezett hivatalos eredmény alapján a rendszer kiszámolja a felhasználó pontjait. Ezután automatikusan frissül a ranglista.</p>
+            
+            <h3><span class="subsection-icon">3.7.</span> Ranglista és statisztikák frissítése</h3>
+            <p>A ranglista frissítése aszinkron módon történik. A backend egy ütemezett folyamat (cron job) segítségével meghatározott időközönként újraszámolja a pontokat. A ranglista objektum minden tippből kiszámolja a pontszámot és frissíti a felhasználói pozíciókat. Az eredményeket a frontend valós időben megjeleníti, így a felhasználók azonnal láthatják, hogyan változott a helyezésük a forduló lezárásakor.</p>
+            
+            <h3><span class="subsection-icon">3.8.</span> Adminisztrációs folyamat</h3>
+            <p>Az admin szerepe a mérkőzések, ligák és felhasználók kezelése. A bejelentkezett admin az adminfelületen keresztül képes új meccseket rögzíteni, időpontokat módosítani és hibás adatokat javítani. Amikor új mérkőzést hoz létre, a rendszer automatikusan létrehozza az üres tippelési rekordokat is a felhasználók számára, hogy azok előre tudjanak tippelni. Az admin továbbá moderálhatja a tartalmat, blokkolhat felhasználókat és új API frissítéseket indíthat el.</p>
+            
+            <h3><span class="subsection-icon">3.9.</span> Összefoglaló</h3>
+            <p>Összességében a rendszer működése erősen automatizált, de átlátható módon működik. A felhasználói és adminisztrátori folyamatok logikusan elkülönülnek, ugyanakkor egységes adatbázison keresztül kapcsolódnak. Az API integráció és az automatikus pontozás a rendszer legfontosabb elemei közé tartoznak, mivel ezek biztosítják a valós idejű frissítéseket és a folyamatos felhasználói élményt. Az analízis modell szintjén mindezek a szekvenciák garantálják a stabil, kiszámítható működést és a skálázhatóság alapjait.</p>
+            
+            <p>Ezek a folyamatok együttesen biztosítják a rendszer folyamatos működését, az adatok konzisztenciáját és a valós idejű játékélményt. A szekvenciák logikusan épülnek egymásra, és minden lépés ellenőrzött és naplózott.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4.</span> Állapotmodellezés</h2>
+            <p>Az állapotmodellezés bemutatja az entitások életciklusát és azok változásait. A Tipp, Mérkőzés és Liga objektumok különböző állapotokon haladnak át a rendszer működése során.</p>
+            
+            <p>Az állapotmodellezés célja, hogy bemutassa, hogyan változik a rendszer különböző objektumainak állapota az életciklusuk során. A Goal Diggers rendszerben több olyan entitás is van, amely dinamikusan vált állapotot: ilyen például a Tipp, a Mérkőzés és a Liga. Az állapotok segítenek megérteni, hogyan reagál a rendszer a felhasználói és adminisztratív eseményekre, valamint hogyan történik az automatikus adatfrissítés az API és a háttérrendszer között.</p>
+            
+            <h3><span class="subsection-icon">4.1.</span> Tipp állapotai</h3>
+            <p>A Tipp entitás életciklusa jól körülhatárolható és több szakaszból áll. A tipp a „Létrehozva" állapotban jön létre, amikor a felhasználó kitölti az űrlapot, de még nem menti el azt véglegesen. A „Beküldve" állapot akkor következik be, amikor a tippet a rendszer rögzíti az adatbázisban, és a felhasználó már nem módosíthatja azt. A mérkőzés lezárását követően a tipp automatikusan „Értékelés alatt" állapotba kerül, ahol a rendszer összeveti a tippelt eredményt a valós adatokkal. Végül, amikor a pontszám kiszámításra kerül, a tipp „Pontozva" vagy „Lezárva" állapotba vált, és bekerül a ranglista frissítési folyamatába.</p>
+            
+            <p>Ez a folyamat garantálja a konzisztenciát: a rendszer minden tippet pontosan egyszer értékel, kizárva a duplikált pontozást vagy manipulációt. Az állapotváltások automatikusak, eseményvezérelten történnek (pl. meccs lezárása, API frissítés), ami csökkenti az emberi hibák esélyét és biztosítja az átlátható működést.</p>
+            
+            <h3><span class="subsection-icon">4.2.</span> Mérkőzés állapotai</h3>
+            <p>A Mérkőzés entitás három fő állapottal rendelkezik: „Tervezett", „Folyamatban" és „Lezárt". A mérkőzés „Tervezett" állapotban kerül be a rendszerbe, ekkor a felhasználók még leadhatják tippjeiket. Amikor a meccs hivatalosan elkezdődik, a rendszer automatikusan „Folyamatban" állapotba helyezi azt, ezzel letiltva az új tippeléseket. A mérkőzés lezárása után, az API-ból érkező hivatalos eredmények alapján, a mérkőzés „Lezárt" állapotba kerül, és megindul a pontozási folyamat.</p>
+            
+            <p>Ez a modell biztosítja, hogy a felhasználók csak a megfelelő időszakban adhassanak le tippeket, és minden eredmény kizárólag hivatalos forrásból származzon. Az állapotok közötti váltás eseményekhez (trigger-ekhez) kötött: például az időzített cron-folyamatok automatikusan ellenőrzik a mérkőzések kezdési és befejezési idejét, ezáltal teljesen automatizálva az adatfrissítést.</p>
+            
+            <h3><span class="subsection-icon">4.3.</span> Liga állapotai</h3>
+            <p>A Liga entitás szintén több életfázison megy keresztül. A liga „Létrehozva" állapotban van, amikor az admin vagy egy felhasználó új ligát hoz létre, de az még nem tartalmaz tagokat vagy beállított szabályokat. Amint a tagok csatlakoznak és megkezdődik a tippelés, a liga „Aktív" állapotba kerül. A szezon vagy a bajnokság végén, amikor már nem lehet új pontokat szerezni, a liga „Lezárt" állapotba kerül, és a rendszer archiválja az eredményeket. Ez lehetőséget biztosít arra, hogy a korábbi ligák statisztikái később is megtekinthetők legyenek.</p>
+            
+            <p>A Liga állapotmodellje jól illeszkedik a rendszer hosszú távú működéséhez, hiszen támogatja az újraindítható szezonokat, valamint a különböző bajnoki ciklusok automatikus kezelését. Ezáltal a rendszer fenntarthatóvá válik, és a felhasználók folyamatosan részt vehetnek új ligákban anélkül, hogy az előzőek adatai elvesznének.</p>
+            
+            <h3><span class="subsection-icon">4.4.</span> Összefüggések és eseményvezérelt működés</h3>
+            <p>Az állapotok közti váltások szorosan kapcsolódnak a rendszer eseményeihez. Egy mérkőzés lezárása például automatikusan kiváltja a kapcsolódó tippek értékelését, majd ez a folyamat továbbhívja a ranglista frissítését. Az eseményláncolat átlátható és moduláris, így könnyen bővíthető új funkciókkal (például értesítések, e-mail küldés, statisztikai rögzítés). A modell előnye, hogy minden objektum pontosan definiált életciklussal rendelkezik, ezáltal az adatbázis mindig aktuális állapotot tükröz, és minimalizálja a logikai hibák előfordulását.</p>
+            
+            <h3><span class="subsection-icon">4.5.</span> Tipp, Mérkőzés és Liga állapotfolyamatok röviden</h3>
+            <div class="highlight">
+                <ul>
+                    <li><strong>Tipp:</strong> Létrehozva → Beküldve → Értékelés alatt → Pontozva → Lezárva</li>
+                    <li><strong>Mérkőzés:</strong> Tervezett → Folyamatban → Lezárt</li>
+                    <li><strong>Liga:</strong> Létrehozva → Aktív → Lezárt</li>
+                </ul>
+            </div>
+            
+            <h3><span class="subsection-icon">4.6.</span> Összegzés</h3>
+            <p>Az állapotmodellezés tehát nem csupán az entitások mozgását írja le, hanem a teljes rendszer működési stabilitását is garantálja. Az alkalmazásban az állapotváltások jól definiált eseményekhez kötődnek, amelyek egységes logikai keretet biztosítanak a fejlesztés és karbantartás számára. Ez az elemzés a fejlesztőknek és a tesztelőknek is iránymutatást ad arra, hogy mikor milyen adatokat és viselkedéseket várhatnak el a rendszer egyes komponenseitől, így a hibakeresés és a validálás is egyszerűbbé válik.</p>
+            
+            <p>Ez az állapotgép biztosítja a rendszer adatbiztonságát, megelőzi a duplikált adatbevitelt, és garantálja a folyamatosan követhető működést.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5.</span> Biztonsági megfontolások</h2>
+            <p>A Goal Diggers rendszer tervezésénél kiemelt figyelmet kapott az adatbiztonság, hiszen a felhasználók személyes adatai, belépési azonosítói és tippjei bizalmas információknak számítanak. A cél egy olyan architektúra kialakítása volt, amely garantálja a biztonságos adatkezelést, minimalizálja a visszaélések lehetőségét, és megfelel a modern webes biztonsági elvárásoknak. Az alábbiakban részletesen bemutatjuk a legfontosabb biztonsági szempontokat, amelyek a rendszer minden rétegében érvényesülnek.</p>
+            
+            <h3><span class="subsection-icon">5.1.</span> Felhasználói azonosítás és jelszókezelés</h3>
+            <p>A felhasználói fiókok védelme érdekében a rendszer erős jelszóházirendet alkalmaz: a jelszavaknak minimum nyolc karakter hosszúnak kell lenniük, és tartalmazniuk kell kis- és nagybetűt, számot, valamint speciális karaktert. A jelszavakat soha nem tároljuk tiszta szövegként; helyettük modern kriptográfiai eljárással, például bcrypt vagy Argon2 algoritmussal hash-eljük őket, így az adatbázis kompromittálása esetén sem férhetők hozzá a valós jelszavak. Bejelentkezéskor a rendszer a hash értéket hasonlítja össze, így a jelszavak soha nem hagyják el biztonságos formában a szervert.</p>
+            
+            <p>Az adminisztrátorok és a felhasználók azonosítását külön szerepkörök (role-based access control) szabályozzák, így elkerülhető, hogy egy átlagos felhasználó olyan funkciókhoz férjen hozzá, amelyek kizárólag a rendszergazdák számára engedélyezettek. A rendszer beépített brute-force elleni védelmet is tartalmaz: ha egy IP-címről többször hibás jelszót adnak meg rövid időn belül, a rendszer ideiglenesen letiltja az adott próbálkozásokat.</p>
+            
+            <h3><span class="subsection-icon">5.2.</span> Adatvédelem és jogosultságkezelés</h3>
+            <p>A személyes adatok és tippek tárolása az adatvédelmi elveknek megfelelően történik. A rendszer a GDPR-kompatibilis adatkezelési elveket követi: csak a működéshez szükséges adatokat tárolja, és azokat kizárólag a meghatározott célokra használja fel. Az adatokhoz való hozzáférést szigorú jogosultsági szintek korlátozzák: például a felhasználók csak a saját tippjeiket és eredményeiket láthatják, mások adataihoz nem férhetnek hozzá. Az adminisztrátoroknak is csak a feladataikhoz szükséges adatkörök megtekintésére van engedélyük.</p>
+            
+            <p>A biztonságos kommunikáció érdekében minden adatátvitel titkosított HTTPS protokollon keresztül zajlik. Ez megakadályozza, hogy a hálózaton harmadik fél hozzáférjen a jelszavakhoz vagy más bizalmas adatokhoz. Az adatbázisban található adatokhoz kizárólag hitelesített kapcsolaton keresztül lehet hozzáférni, és minden adatlekérdezést auditnapló rögzít.</p>
+            
+            <h3><span class="subsection-icon">5.3.</span> API-biztonság és adatforrások védelme</h3>
+            <p>Mivel a rendszer külső sportadatokat használ (pl. mérkőzés-eredményeket API-n keresztül), különösen fontos a biztonságos adatkommunikáció. Az API-hívások autentikációs tokennel és kulcsalapú azonosítással működnek, így illetéktelen személyek nem férhetnek hozzá az adatokhoz. Az API-lekéréseket a rendszer naplózza, hogy visszakövethető legyen minden adatfrissítés és lekérdezés.</p>
+            
+            <p>Az API integrációk során bevezetett rate limiting (sebességkorlátozás) védi a rendszert a túlterheléses támadások (DoS/DDoS) ellen. Ezen kívül a beérkező adatok validálása minden lekérés után megtörténik, ezzel megelőzve a hibás vagy szándékosan manipulált adatbevitel lehetőségét. A szerver oldali ellenőrzés garantálja, hogy a külső forrásokból származó adatok ne kerülhessenek be közvetlenül a felhasználói felületre.</p>
+            
+            <h3><span class="subsection-icon">5.4.</span> XSS, CSRF és SQL Injection elleni védelem</h3>
+            <p>A rendszer teljes front-end és back-end rétege XSS (cross-site scripting) és CSRF (cross-site request forgery) támadások ellen védett. Az űrlapok és bemeneti mezők minden esetben szűrik a felhasználói adatokat, és a megjelenítés során a speciális karaktereket escape-elik, így a beillesztett kód nem hajtható végre. A CSRF elleni védelem token-alapú megoldással történik: minden felhasználói kéréshez egyedi azonosító tartozik, amit a szerver ellenőriz, ezzel megakadályozva a jogosulatlan műveleteket.</p>
+            
+            <p>Az adatbázis-kezelés során a lekérdezések paraméterezett SQL-parancsokkal futnak, így a rendszer teljes mértékben védett az SQL Injection típusú támadásokkal szemben. A fejlesztés során alkalmazott ORM-réteg (Object Relational Mapping) tovább erősíti ezt a védelmet, hiszen automatikusan kezeli az adatmezőket és kizárja a közvetlen SQL-kód futtatását.</p>
+            
+            <h3><span class="subsection-icon">5.5.</span> Adatmentés, naplózás és incidenskezelés</h3>
+            <p>A biztonság nemcsak a támadások kivédését, hanem az esetleges hibák és incidensek utáni gyors helyreállítást is jelenti. A rendszer napi automatikus adatmentéseket készít, amelyeket titkosított formában tárol külön szerveren. Az eseménynaplók (logok) rögzítik a legfontosabb rendszereseményeket, például a bejelentkezéseket, adatváltoztatásokat és API-lekéréseket, így minden változás visszakövethető.</p>
+            
+            <p>Incidens esetén a rendszer automatikus értesítést küld az adminisztrátornak, és szükség esetén letiltja a gyanús fiókokat, amíg a helyzet kivizsgálása be nem fejeződik. Ezzel a megoldással minimalizálható a kár és megelőzhetők a további visszaélések.</p>
+            
+            <h3><span class="subsection-icon">5.6.</span> Összegzés</h3>
+            <p>Összességében a rendszer biztonsági architektúrája több rétegű védelemmel rendelkezik: a hitelesítéstől az adatbázis-kezelésig minden szinten megvalósul a megbízhatóság és a titkosság elve. Az alkalmazott megoldások megfelelnek a modern webfejlesztési standardoknak, és hosszú távon is biztosítják a rendszer stabil működését. Az előrelátó biztonsági intézkedések révén a fejlesztők és a felhasználók is garantáltan biztonságos környezetben használhatják az alkalmazást.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">6.</span> Kockázatelemzés és jövőbeli fejlesztések</h2>
+            <p>A projekt fejlesztése során elengedhetetlen volt a potenciális kockázatok és korlátok azonosítása, valamint azok kezelési stratégiáinak kidolgozása. A Goal Diggers célja, hogy hosszú távon is stabil, biztonságos és felhasználóbarát rendszert biztosítson, ezért a kockázatelemzés és a jövőbeli fejlesztési irányok kiemelt figyelmet kaptak. Az alábbiakban bemutatjuk a legfontosabb technikai, üzleti és felhasználói kockázatokat, illetve az ezekre adott válaszokat.</p>
+            
+            <h3><span class="subsection-icon">6.1.</span> Technikai kockázatok</h3>
+            <p>A legnagyobb technikai kockázatot a rendszer stabilitása és méretezhetősége jelenti. A webalkalmazás több párhuzamos felhasználót szolgál ki, ezért fontos a háttérrendszer (adatbázis és szerver) optimális konfigurálása. Túlterhelés esetén a rendszer válaszideje nőhet, ami rontja a felhasználói élményt. Ezt a kockázatot skálázható infrastruktúrával (pl. felhőalapú hoszting, cache-elés, load balancing) lehet csökkenteni. Emellett a verziókezelés és a CI/CD folyamatok (GitHub Actions, automatizált tesztelés) segítik a hibamentes fejlesztést és telepítést.</p>
+            
+            <p>Másik lehetséges technikai kockázat a függőségek elavulása. A webes technológiák gyorsan fejlődnek, így a használt könyvtárak vagy API-k idővel inkompatibilissé válhatnak. A fejlesztői csapatnak ezért rendszeres karbantartási ciklusokat kell bevezetnie, és folyamatosan figyelnie kell a biztonsági frissítéseket. A dokumentáció és a kód modularitása (komponens-alapú struktúra) megkönnyíti az ilyen frissítések bevezetését.</p>
+            
+            <h3><span class="subsection-icon">6.2.</span> Biztonsági kockázatok</h3>
+            <p>A biztonság kulcsfontosságú a Goal Diggers működésében, hiszen felhasználói adatokat kezel. A potenciális kockázatok közé tartozik a jelszavak kiszivárgása, SQL-injection, XSS-támadások, vagy az adathalászat. Ezek elkerülése érdekében a rendszer minden bemenetet validál, és a felhasználói jelszavakat titkosítva tárolja. A HTTPS protokoll, a biztonságos sütikezelés és a session time-out funkciók mind hozzájárulnak a biztonságos működéshez.</p>
+            
+            <p>A fejlesztés következő fázisában tervezett a többfaktoros hitelesítés (2FA) bevezetése, valamint az aktivitásnaplózás, amely minden felhasználói műveletet rögzít. Ez nemcsak a biztonságot növeli, hanem segít az esetleges hibák és visszaélések gyors felismerésében is. Ezen kívül fontos a felhasználók edukálása a biztonságos jelszóhasználatról és adatkezelésről.</p>
+            
+            <h3><span class="subsection-icon">6.3.</span> Üzleti és projektkockázatok</h3>
+            <p>Az üzleti kockázatok közé tartozik a projekt fenntarthatósága és a felhasználói bázis növekedésének kiszámíthatatlansága. Ha a felhasználói aktivitás elmarad a várttól, a platform értéke és láthatósága csökkenhet. Ennek megelőzése érdekében a rendszerhez marketingkampányok, közösségi események és partneri együttműködések is kapcsolódhatnak. Például sportegyesületekkel vagy helyi közösségekkel történő együttműködés növelheti az elérést és az aktivitást.</p>
+            
+            <p>További kockázatot jelenthet az erőforrások korlátozottsága – különösen, ha a fejlesztés önkéntes vagy hallgatói projektként zajlik. Ennek kezelésére célszerű ütemtervet, felelősségi köröket és határidőket kijelölni, valamint a dokumentációt naprakészen tartani. A transzparens kommunikáció és a csapatszintű verziókezelés (GitHub) jelentősen csökkenti a szervezési kockázatokat.</p>
+            
+            <h3><span class="subsection-icon">6.4.</span> Felhasználói kockázatok</h3>
+            <p>Felhasználói oldalról kockázatot jelenthet, ha az alkalmazás túl bonyolultnak vagy átláthatatlannak tűnik. Ennek elkerülése érdekében a felhasználói felületet folyamatosan tesztelni kell, és a visszajelzések alapján javítani. A hibás vagy félrevezető üzenetek csökkenthetik a bizalmat, ezért minden visszajelzés világos és barátságos nyelvezetű.</p>
+            
+            <p>Szintén felmerülhet adatvédelmi aggály, különösen ha a rendszer közösségi funkciókat is tartalmaz (pl. nyilvános ranglista). A jövőbeli fejlesztések között ezért szerepel az adatmegosztási beállítások testreszabhatósága, hogy minden felhasználó maga dönthesse el, milyen információkat jelenít meg nyilvánosan.</p>
+            
+            <h3><span class="subsection-icon">6.5.</span> Jövőbeli fejlesztési irányok</h3>
+            <p>A Goal Diggers jelenlegi verziója egy jól működő alapot biztosít, de számos fejlesztési lehetőség rejlik benne. A tervezett új funkciók között szerepel a valós idejű mérkőzéskövetés, statisztikai elemzések, valamint a predikciós algoritmusok integrálása, amelyek mesterséges intelligencia segítségével becsülhetik a mérkőzések kimenetelét. Ezek az újítások nemcsak szórakoztatóbbá, hanem technológiailag is fejlettebbé tennék az alkalmazást.</p>
+            
+            <p>A közösségi élmény erősítésére további lehetőség a felhasználói chat, a privát ligák és kihívások létrehozása. A jövőbeli fejlesztések célja, hogy a platform ne csupán egy tippjáték legyen, hanem egy aktív sportközösség központja, ahol a felhasználók megoszthatják tippjeiket, statisztikáikat és sikereiket.</p>
+            
+            <h3><span class="subsection-icon">6.6.</span> Technológiai fejlesztési tervek</h3>
+            <p>A technológiai fejlesztések közé tartozik a backend modernizálása (pl. Node.js vagy Django REST API), valamint a frontend továbbfejlesztése React vagy Vue keretrendszerrel. Ez lehetővé tenné a dinamikus komponensfrissítést, valós idejű adatkommunikációt és gyorsabb oldalbetöltést. A jelenlegi statikus HTML-rendszerre építve egy fokozatos átalakulás tervezett, hogy a fejlesztés rugalmas és karbantartható maradjon.</p>
+            
+            <p>A rendszerbe később automatizált tesztelési pipeline is integrálható, ami minden új verziót automatikusan ellenőriz hibák, teljesítmény és biztonság szempontjából. Ezzel a megoldással a fejlesztés hosszú távon fenntartható és skálázható marad.</p>
+            
+            <h3><span class="subsection-icon">6.7.</span> Összegzés</h3>
+            <p>Összességében a kockázatelemzés és a jövőbeli fejlesztési irányok kidolgozása biztosítja, hogy a Goal Diggers projekt hosszú távon is életképes, biztonságos és innovatív maradjon. A technikai és felhasználói szempontból egyaránt kiegyensúlyozott fejlesztési stratégia a kulcsa annak, hogy az alkalmazás ne csak működjön, hanem fejlődjön is a közösség igényeivel együtt. A folyamatos karbantartás, visszajelzésgyűjtés és innováció egyaránt hozzájárul ahhoz, hogy a Goal Diggers ne csupán egy tippjáték, hanem egy inspiráló sportélmény legyen minden felhasználó számára.</p>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">7.</span> Felhasználói élmény és UI/UX megfontolások</h2>
+            <p>A Goal Diggers alkalmazás tervezése során a felhasználói élmény (User Experience – UX) és a felhasználói felület (User Interface – UI) kiemelt szerepet kapott. A cél egy olyan webes platform létrehozása volt, amely egyszerre modern, gyors, intuitív és vizuálisan vonzó, miközben támogatja a közösségi élményt és a sport iránti lelkesedést. Az alkalmazás arculata a futball világából merít inspirációt: a színek, ikonok és tipográfia mind a sportdinamikát és a versenyszellemet tükrözik.</p>
+            
+            <h3><span class="subsection-icon">7.1.</span> Felhasználói útvonalak és interakciók</h3>
+            <p>A rendszer tervezésénél külön figyelmet kapott a felhasználói útvonal (user flow) átláthatósága. A látogató egyszerűen, akár vendégként is böngészhet, de a regisztráció és belépés mindössze néhány lépésből áll. A felhasználói útvonal logikusan épül fel: kezdőoldal → fiók létrehozása → tippelés → liga részvétel → ranglista megtekintése. Minden művelet után vizuális visszajelzést kap a felhasználó (pl. zöld sikerüzenet, animált gomb, vagy felugró értesítés), ami segíti a gyors tájékozódást és megerősíti a pozitív interakciókat.</p>
+            
+            <p>A rendszer úgy lett kialakítva, hogy az új felhasználók számára se legyen tanulási görbe: az ikonok egyértelműek, az elrendezés konzisztens, a menük intuitívak. A legfontosabb funkciók (pl. tippelés, ranglista) mindig elérhetők a felső navigációból, így a felhasználók soha nem tévednek el a felületen.</p>
+            
+            <h3><span class="subsection-icon">7.2.</span> Vizuális dizájn és arculat</h3>
+            <p>A dizájn a „sportos minimalizmus" elvét követi. A fő színek a futballhoz kapcsolódó árnyalatokat tükrözik: a zöld (pálya), a fehér (tiszta játéktér) és a sötétszürke (kontraszt, modernitás) dominál. A felület elemei – kártyák, gombok és táblázatok – lekerekített sarkokkal és enyhe árnyékokkal jelennek meg, ami barátságos, mégis professzionális hangulatot kelt. Az ikonrendszer konzisztens: a felhasználói profil, tipp, liga és statisztika ikonok vizuálisan is összetartoznak, így a felhasználó könnyen asszociál a funkciókra.</p>
+            
+            <p>A tipográfia jól olvasható és modern betűtípusokat alkalmaz (pl. Open Sans, Roboto), amelyek különböző képernyőméreteken is tisztán jelennek meg. A dizájn reszponzív: a mobilon és asztali gépen megjelenő nézetek egységes élményt nyújtanak, de az elemek méretezése és elrendezése automatikusan igazodik a kijelzőhöz. Az oldal betöltésekor dinamikus animációk (pl. fade-in, slide-up) teszik kellemesebbé a navigációt, miközben nem lassítják a működést.</p>
+            
+            <h3><span class="subsection-icon">7.3.</span> Reszponzív tervezés és elérhetőség</h3>
+            <p>A Goal Diggers egyik fő célja, hogy bármilyen eszközről kényelmesen használható legyen. A reszponzív tervezés során a mobilos élmény nem csupán egy szűkített verzió, hanem egy teljes funkcionalitású, optimalizált felület. Az oldalelemek automatikusan igazodnak az érintőképernyőkhöz: a gombok nagyobbak, a navigációs elemek egyszerűbben kezelhetők, és a szövegek jól olvashatók. A tippelési felület például mobilon is egyetlen mozdulattal használható, a csúszkás vagy legördülő elemek segítik a gyors adatbevitel.</p>
+            
+            <p>A hozzáférhetőség (accessibility) is alapelv: a kontrasztarány, a betűméret és a billentyűzet-navigáció mind megfelel az alapvető WCAG 2.1 szabványoknak. A képernyőolvasók támogatása érdekében minden fontos gomb és link alternatív szöveget tartalmaz. Ez különösen fontos lehet látássérült felhasználók számára, akik így is aktívan részt vehetnek a közösségben.</p>
+            
+            <h3><span class="subsection-icon">7.4.</span> Visszajelzés és motiváció</h3>
+            <p>A felhasználói élmény része a motiváció is: a rendszer pozitív megerősítéseket ad minden interakciónál. Például sikeres tipp után egy rövid animáció és egy „Gratulálunk!" üzenet jelenik meg, míg hibás adatok esetén barátságos, magyarázó hibaüzenetet kap a felhasználó. A rendszer célja, hogy a hibákat ne büntesse, hanem segítsen kijavítani: például ha rossz formátumban adja meg a tippet, a mező automatikusan javaslatot ad a helyes formára.</p>
+            
+            <p>A gamifikációs elemek is támogatják a felhasználói élményt: jelvények, heti kihívások és ligaszintek ösztönzik az aktív részvételt. A ranglisták és statisztikák vizuálisan is motiválják a játékosokat, miközben egészséges versenyszellemet teremtenek. A cél, hogy a felhasználók rendszeresen visszatérjenek, ne csak a mérkőzések idején, hanem a közösségi élmény miatt is.</p>
+            
+            <h3><span class="subsection-icon">7.5.</span> Tesztelés és felhasználói visszajelzések</h3>
+            <p>A fejlesztés során folyamatos UX-tesztelés történt, elsősorban valós felhasználók bevonásával. A prototípusokat több körben vizsgálták: először a navigáció és elrendezés érthetőségét, majd a tippelési és ligakezelési folyamatokat értékelték. Az így kapott visszajelzések alapján több finomhangolás is történt – például egyszerűsítették a regisztrációs űrlapot, és átláthatóbbá tették a ranglisták megjelenítését.</p>
+            
+            <p>A jövőben tervezett A/B tesztelések segítségével tovább javítható a felhasználói élmény, például az elrendezések és színek hatásának elemzésével. A visszajelzések gyűjtésére a rendszer beépített „Értékelés" és „Javaslat küldése" funkciót is tartalmaz majd, ami közvetlenül a fejlesztői csapat felé irányítja az észrevételeket.</p>
+            
+            <h3><span class="subsection-icon">7.6.</span> Összegzés</h3>
+            <p>Összességében a Goal Diggers alkalmazás UI/UX kialakítása a felhasználók igényeire és a sportközösségi élményre épül. Az egyszerű, modern, de karakteres dizájn segíti a gyors eligazodást, miközben motiválja a játékosokat a részvételre. A reszponzív, hozzáférhető és jól strukturált felület biztosítja, hogy minden felhasználó – függetlenül az eszközétől – élvezetes, áramvonalas élményben részesüljön. Ez az élmény a projekt egyik legfontosabb értéke, hiszen a hosszú távú siker kulcsa nemcsak a technológia, hanem a felhasználók elégedettsége.</p>
+        </section>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <footer>
+        <p>Goal Diggers</p>
+        <p>Analízis modell</p>
+        <a href="index.html" class="footer-link">Főoldal</a>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
